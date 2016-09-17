@@ -1,52 +1,8 @@
-[![Build Status](https://travis-ci.org/jekkos/opensourcepos.svg?branch=master)](https://travis-ci.org/jekkos/opensourcepos)
-[![Join the chat at https://gitter.im/jekkos/opensourcepos](https://badges.gitter.im/jekkos/opensourcepos.svg)](https://gitter.im/jekkos/opensourcepos?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![devDependency Status](https://david-dm.org/jekkos/opensourcepos/dev-status.svg)](https://david-dm.org/jekkos/opensourcepos#info=devDependencie)
-[![Dependency Status](https://gemnasium.com/badges/github.com/jekkos/opensourcepos.svg)](https://gemnasium.com/github.com/jekkos/opensourcepos)
-[![GitHub version](https://badge.fury.io/gh/jekkos%2Fopensourcepos.svg)](https://badge.fury.io/gh/jekkos%2Fopensourcepos)
-[![Translation status](http://weblate.jpeelaer.net/widgets/ospos/-/svg-badge.svg)](http://weblate.jpeelaer.net/engage/ospos/?utm_source=widget)
-
 Introduction
 ------------
+This is an optimised version of opensourcepos for rasberry-pi to work on low configuration computers.
 
-Open Source Point of Sale is a web based point of sale system written in the PHP language.
-It uses MySQL (or MariaDB) as the data storage back-end and has a simple user interface.
 
-The latest version 3.0.0 is a complete overhaul of the original software, based on Bootswatch/Bootstrap 3.x using theme Flatly as default, and CodeIgniter 3.x.
-
-It now has a fresh look'n'feel with improved functionality and security.
-
-License
--------
-
-Open Source Point of Sale is licensed under MIT terms with an important addition:
-
-_The footer signature "You are using Open Source Point Of Sale" with version, 
-hash and link to the original distribution of the code MUST BE RETAINED, 
-MUST BE VISIBLE IN EVERY PAGE and CANNOT BE MODIFIED._
-
-Also worth noting:
-
-_The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software._
-
-For more details please read the file __COPYING__.
-
-It's important to understand that althought you are free to use the software the copyright stays and the license agreement applies in all cases.
-Therefore any actions like:
-
-- Removing COPYING and any license files is prohibited
-- Authoring the footer notice replacing it with your own or even worse claiming the copyright is absolutely prohibited
-- Claiming full ownership of the code is prohibited
-
-In short you are free to use the software but you cannot claim any property on it.
-
-Any person or company found breaching the license agreement will be chased up.
-
-Keep the Machine Running
-------------------------
-If you like the project, and you are making money out of it on a daily basis, then consider buying me a coffee so I can keep adding features.
-
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MUN6AEG7NY6H8)
 
 Server Requirements
 -------------------
@@ -54,24 +10,7 @@ PHP version 5.5 or newer is recommended but PHP 7.x is not fully supported yet.
 
 Reporting Bugs
 --------------
-Since OSPOS 3.0.0 is a version under development, please make sure you always run the latest 2.4_to_3.0.sql database upgrade script.
-Please DO NOT post issues if you have not done that before running OSPOS 3.0.
-Please also make sure you have updated all the files from latest master.
 
-Bug reports must follow this schema:
-
-1. Ospos **version string with git commit hash** (see ospos footer)
-2. OS name and version running your Web Server (e.g. Linux Ubuntu 15.0)
-3. Web Server name and version (e.g. Apache 2.4)
-4. Database name and version (e.g. =< MySQL 5.6)
-5. PHP version (e.g. PHP 5.5)
-6. Language selected in OSPOS (e.g. English, Spanish)
-7. Any configuration of OSPOS that you changed
-8. Exact steps to reproduce the issue (test case)
-9. Optionally some screenshots to illustrate each step
-
-If above information is not provided in full, your issue will be tagged as pending.
-If missing information is not provided within a week we will close your issue.
 
 Cloud install
 -------------
@@ -123,15 +62,4 @@ To build and run the image, issue following commands in a terminal with docker i
     docker-compose build
     docker-compose up 
 
-FAQ
----
-* If a blank page (HTTP status 500) shows after search completion or receipt generation, then double check php5-gd presence in your php installation. On windows check in php.ini whether the lib is installed. On Ubuntu issue `sudo apt-get install php5-gd`. Also have a look at the Dockerfile for a complete list of recommended packages.
-
-* If sales and receiving views don't show properly, please make sure BCMath lib (php-bcmath) is installed. On windows check php.ini and make sure php_bcmath extension is not commented out
-
-* If the following error is seen in sales module `Message: Class 'NumberFormatter' not found` then you don't have `php5-intl` extension installed. Please check the [wiki](https://github.com/jekkos/opensourcepos/wiki/Localisation-support#php5-intl-extension-installation) to resolve this issue on your platform.
-
-* You are getting following error `Message: Can't use method return value in write context` saying that you are probably using PHP7 which is not completely supported yet. Check your hosting configuration to verify whether you have a supported PHP version installed
-
-* If you read errors containing messages with Socket word in it, please make sure you have installed PHP Sockets support (e.g. go to PHP.ini and make sure all the needed modules are not commented out. This means php5-gd, php-intl and php-sockets. Restart the web server)
 
