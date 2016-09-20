@@ -27,9 +27,7 @@ class Sms_lib
 			//echo $username . ' ' . $hash . ' ' . $numbers . ' ' . $message . ' ' . $sender;
 		}
 		else
-		{
-			$response = TRUE;
-			
+		{	
 			// make sure passed string is url encoded
 			//-----$message = rawurlencode($message);
 			
@@ -57,6 +55,11 @@ class Sms_lib
 			
 
 			//textlocal
+			$success_status = "success";
+			$failure_status = "failure";
+			$debug_level_test = FALSE; // make it to 'TRUE' for enable debug
+			// when $debug_level_test is set to TRUE then you can see the json response in
+			// browser developer tools
 			
 			//$username = "<username>";
 			//$hash = "<hash_key>";
@@ -78,8 +81,19 @@ class Sms_lib
 			curl_setopt($ch, CURLOPT_POST, true);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			$result = curl_exec($ch); // This is the result from the API
+			$result_json = curl_exec($ch); // This is the result from the API
 			curl_close($ch);
+			$result = json_decode($result_json);
+			$message_sent_status = $result->{'status'};
+			if (strcmp($message_sent_status, $success_status) == 0) {
+				$response = TRUE;
+			}
+
+			// below code will only be executed when $debug_level_test is set to TRUE
+			if($debug_level_test) {
+			echo $message_sent_status;
+			echo $result_json;
+			}
 		}
 
 		return $response;
