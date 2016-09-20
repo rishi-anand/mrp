@@ -112,7 +112,7 @@
 						<span class="icon-bar"></span>
 					</button>
 			
-					<a class="navbar-brand hidden-sm" href="<?php echo site_url(); ?>">OSPOS</a>
+					<a class="navbar-brand hidden-sm" href="<?php echo site_url(); ?>">MRP</a>
 				</div>
 
 				<div class="navbar-collapse collapse">
