@@ -14,21 +14,21 @@ CREATE TABLE `ospos_app_config` (
 --
 
 INSERT INTO `ospos_app_config` (`key`, `value`) VALUES
-('address', '123 Nowhere street'),
-('company', 'Open Source Point of Sale'),
-('default_tax_rate', '8'),
-('email', 'admin@pappastech.com'),
+('address', 'New Delhi'),
+('company', 'MRP'),
+('default_tax_rate', '5'),
+('email', 'admin@mrp.com'),
 ('fax', ''),
-('phone', '555-555-5555'),
+('phone', '918888888888'),
 ('return_policy', 'Test'),
-('timezone', 'America/New_York'),
+('timezone', 'Asia/Kolkata'),
 ('website', ''),
 ('company_logo', ''),
 ('tax_included', '0'),
 ('barcode_content', 'id'),
 ('barcode_type', 'Code39'),
 ('barcode_width', '250'),
-('barcode_height', '50'),
+('barcode_height', '30'),
 ('barcode_quality', '100'),
 ('barcode_font', 'Arial'),
 ('barcode_font_size', '10'),
@@ -125,7 +125,7 @@ CREATE TABLE `ospos_employees` (
 --
 
 INSERT INTO `ospos_employees` (`username`, `password`, `person_id`, `deleted`, `hash_version`) VALUES
-('admin', '$2y$10$vJBSMlD02EC7ENSrKfVQXuvq9tNRHMtcOA8MSK2NYS748HHWm.gcG', 1, 0, 2);
+('admin', '$2y$10$5Cjz5Zx09lxx3DOEyaPreeWq184voej/GzQWwlZQNrCEiRc3liBsC', 1, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -346,7 +346,7 @@ CREATE TABLE `ospos_people` (
 --
 
 INSERT INTO `ospos_people` (`first_name`, `last_name`, `phone_number`, `email`, `address_1`, `address_2`, `city`, `state`, `zip`, `country`, `comments`, `person_id`) VALUES
-('John', 'Doe', '555-555-5555', 'admin@pappastech.com', 'Address 1', '', '', '', '', '', '', 1);
+('Ravi', 'Kumar', '918888888888', 'admin@mrp.com', 'Address 1', 'Address 2', 'New Delhi', 'New Delhi', '110011', 'India', 'It is just a test user', 1);
 
 -- --------------------------------------------------------
 
