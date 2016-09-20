@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 |
 */
-$config['application_version'] = '3.0.0';
+$config['application_version'] = '1.0.0';
 
 /*
 |--------------------------------------------------------------------------
