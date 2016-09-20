@@ -1,0 +1,54 @@
+Menu Bars flickering
+http://raspberrypi.stackexchange.com/questions/40392/connecting-with-vnc-causes-white-flickering-menu-bar
+
+http://42bots.com/tutorials/access-raspberry-pi-terminal-and-desktop-remotely-with-ssh-and-vnc/
+vnc://raspberrypi.local:5901
+
+
+
+
+
+Commands :
+zip - tar cvjf filename.tar.bz2 /path/to/directory/
+unzip - tar xvf filename.tar.xxx
+
+
+sudo dd bs=1m if=2016-05-27-raspbian-jessie-lite.img of=/dev/disk3
+
+
+sudo apt-get install tightvncserver
+tightvncserver // to setup
+
+
+//setting up wifi
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+network={
+    ssid="goBlue"
+    psk="IncredibleIndia"
+}
+
+best apache/mysql/and php iinstall link
+https://www.howtoforge.com/tutorial/install-apache-with-php-and-mysql-lamp-on-debian-jessie/
+
+
+//install CUPS
+http://www.howtogeek.com/169679/how-to-add-a-printer-to-your-raspberry-pi-or-other-linux-computer/
+http://scruss.com/blog/2015/07/12/thermal-printer-driver-for-cups-linux-and-raspberry-pi-zj-58/
+
+//install chrome
+http://raspberrypi.stackexchange.com/questions/41603/installing-chrome-on-raspbian
+
+
+//install printer driver as given in cd
+// install below line in raspberry pi
+sudo apt-get install system-config-printer
+
+
+
+diskpart
+list disk
+select disk <no>
+clean
+create partition primary
+format fs=fat32 quick
+assign
