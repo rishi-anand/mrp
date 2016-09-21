@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Code Version
 |--------------------------------------------------------------------------
 |
-| This is the version of Open Source Point of Sale you're running
+| This is the version of MRP you're running
 |
 |
 */

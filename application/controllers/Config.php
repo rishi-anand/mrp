@@ -20,7 +20,7 @@ class Config extends Secure_Controller
 		$various = FALSE;
 		$license = array();
 
-		$license[$i]['title'] = 'Open Source Point Of Sale ' . $this->config->item('application_version');
+		$license[$i]['title'] = 'MRP ' . $this->config->item('application_version');
 
 		if(file_exists('license/COPYING'))
 		{

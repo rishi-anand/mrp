@@ -12,7 +12,7 @@ function load_stats()
         $CI->session->set_userdata('session_sha1', substr($session_sha1, 0, 7));
 
         preg_match('/\$Id:\s(.*?)\s\$/', $footer_tags, $matches);
-        $needle = "Open Source Point Of Sale";
+        $needle = "MRP";
 
         if(!strstr($line, $needle) || $session_sha1 != $matches[1])
         {
