@@ -21,7 +21,7 @@ INSERT INTO `ospos_app_config` (`key`, `value`) VALUES
 ('fax', ''),
 ('phone', '918888888888'),
 ('return_policy', 'Test'),
-('timezone', 'Asia/Kolkata'),
+('timezone', 'America/New_York'),
 ('website', ''),
 ('company_logo', ''),
 ('tax_included', '0'),
