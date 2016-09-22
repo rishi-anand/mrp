@@ -307,7 +307,7 @@ CREATE TABLE `ospos_modules` (
 
 INSERT INTO `ospos_modules` (`name_lang_key`, `desc_lang_key`, `sort`, `module_id`) VALUES
 ('module_config', 'module_config_desc', 110, 'config'),
-('module_customers', 'module_customers_desc', 10, 'customers'),
+('module_customers', 'module_customers_desc', 70, 'customers'),
 ('module_employees', 'module_employees_desc', 80, 'employees'),
 ('module_giftcards', 'module_giftcards_desc', 90, 'giftcards'),
 ('module_items', 'module_items_desc', 20, 'items'),
@@ -315,8 +315,9 @@ INSERT INTO `ospos_modules` (`name_lang_key`, `desc_lang_key`, `sort`, `module_i
 ('module_messages', 'module_messages_desc', 100, 'messages'),
 ('module_receivings', 'module_receivings_desc', 60, 'receivings'),
 ('module_reports', 'module_reports_desc', 50, 'reports'),
-('module_sales', 'module_sales_desc', 70, 'sales'),
-('module_suppliers', 'module_suppliers_desc', 40, 'suppliers');
+('module_sales', 'module_sales_desc', 10, 'sales'),
+('module_suppliers', 'module_suppliers_desc', 40, 'suppliers'),
+('module_region', 'module_region_desc', 120, 'region');
 
 -- --------------------------------------------------------
 
@@ -388,7 +389,8 @@ INSERT INTO `ospos_permissions` (`permission_id`, `module_id`) VALUES
 ('reports', 'reports'),
 ('sales', 'sales'),
 ('config', 'config'),
-('suppliers', 'suppliers');
+('suppliers', 'suppliers'),
+('region', 'region');
 
 INSERT INTO `ospos_permissions` (`permission_id`, `module_id`, `location_id`) VALUES
 ('items_stock', 'items', 1),
@@ -437,7 +439,8 @@ INSERT INTO `ospos_grants` (`permission_id`, `person_id`) VALUES
 ('items_stock', 1),
 ('sales_stock', 1),
 ('receivings_stock', 1),
-('suppliers', 1);
+('suppliers', 1),
+('region', 1);
 
 --
 -- Table structure for table `ospos_receivings`

@@ -23,3 +23,5 @@ $lang["module_suppliers"] = "Suppliers";
 $lang["module_suppliers_desc"] = "Add, Update, Delete, and Search suppliers";
 $lang["module_messages"] = "Messages";
 $lang["module_messages_desc"] = "Send Messages to Customers, Suppliers, Employees et al.";
+$lang["module_region"] = "Region";
+$lang["module_region_desc"] = "Change the region's configuration";
