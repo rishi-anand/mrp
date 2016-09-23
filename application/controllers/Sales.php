@@ -11,6 +11,7 @@ class Sales extends Secure_Controller
 		$this->load->library('sale_lib');
 		$this->load->library('barcode_lib');
 		$this->load->library('email_lib');
+		$this->load->library('escpos/autoload_lib');
 	}
 
 	public function index()
@@ -392,14 +393,19 @@ class Sales extends Secure_Controller
 			if($this->sale_lib->is_invoice_number_enabled())
 			{
 				$this->load->view('sales/invoice', $data);
+				$this->load->view('sales/thermal_printer_58', $data);
 			}
 			else
 			{
 				$this->load->view('sales/receipt', $data);
+				$this->load->view('sales/thermal_printer_58', $data);
 			}
 
 			$this->sale_lib->clear_all();
+
+
 		}
+	// function complete ends here	
 	}
 
 	public function send_invoice($sale_id)
