@@ -11,7 +11,6 @@ class Sales extends Secure_Controller
 		$this->load->library('sale_lib');
 		$this->load->library('barcode_lib');
 		$this->load->library('email_lib');
-		$this->load->library('escpos/autoload_lib');
 	}
 
 	public function index()
