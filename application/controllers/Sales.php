@@ -392,12 +392,10 @@ class Sales extends Secure_Controller
 			if($this->sale_lib->is_invoice_number_enabled())
 			{
 				$this->load->view('sales/invoice', $data);
-				$this->load->view('sales/thermal_printer_58', $data);
 			}
 			else
 			{
 				$this->load->view('sales/receipt', $data);
-				$this->load->view('sales/thermal_printer_58', $data);
 			}
 
 			$this->sale_lib->clear_all();
