@@ -52,3 +52,24 @@ clean
 create partition primary
 format fs=fat32 quick
 assign
+
+
+//escpos
+https://github.com/mike42/escpos-php
+https://mike42.me/blog/what-is-escpos-and-how-do-i-use-it
+
+//PHP USB PRINTER
+Hey,
+
+I often refer to this blog post when I talk about Linux USB.
+
+Your next debugging steps are along the lines of-
+
+sudo usermod -a -G lp habibridho (Add yourself, and your web user to the lp group)
+lsmod | grep usblp (confirm that usblp is loaded. if not, make it load!)
+ls /dev/usb/ (find the device. If not, replug it and debug with dmesg)
+echo "test" >> /dev/usb/ABC" (where "ABC" is the name of your printer, found in the last step)
+Once you have this working on the command-line, you are ready to use new FilePrintConector("/dev/usb/ABC") to start printing with escpos-php.
+
+//php usb printer
+https://mike42.me/blog/2015-03-getting-a-usb-receipt-printer-working-on-linux

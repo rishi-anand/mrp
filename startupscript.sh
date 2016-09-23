@@ -29,3 +29,16 @@ wget -qO - http://bintray.com/user/downloadSubjectPublicKey?username=bintray | s
 echo "deb http://dl.bintray.com/kusti8/chromium-rpi jessie main" | sudo tee -a /etc/apt/sources.list
 sudo apt-get update
 sudo apt-get install chromium-browser -y
+
+ sudo usermod -a -G lp root
+ sudo usermod -a -G lp rishi
+ sudo usermod -a -G lp pi
+ 
+ sudo usermod -a -G www-data rishi
+ sudo usermod -a -G www-data pi
+ sudo usermod -a -G www-data root
+ chmod -Rv 755 cache* /var/www/html/opensourcepos
+ sudo chgrp -R www-data /var/www
+ sudo chmod -R g+w /var/www
+ sudo find /var/www -type d -exec chmod 2775 {} \;
+ sudo find /var/www -type f -exec chmod ug+rw {} \;
