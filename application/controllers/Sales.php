@@ -391,6 +391,21 @@ class Sales extends Secure_Controller
 			
 			if($this->sale_lib->is_invoice_number_enabled())
 			{
+				?>
+				<script>
+				var sale_data = <?php echo json_encode($data, JSON_HEX_TAG); ?>;
+				sale_data = JSON.stringify(sale_data);
+				var url = "http://192.168.0.253/escpos-php-master/example/data.php?data="+sale_data;
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						console.log(this.responseText);
+					}
+				};
+				xmlhttp.open("GET", url  , true);
+				xmlhttp.send();
+				</script>
+				<?php
 				$this->load->view('sales/invoice', $data);
 			}
 			else

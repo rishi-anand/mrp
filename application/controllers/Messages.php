@@ -9,6 +9,7 @@ class Messages extends Secure_Controller
 		parent::__construct('messages');
 		
 		$this->load->library('sms_lib');
+		$this->load->library('receipt_lib');
 	}
 	
 	public function index()
@@ -34,6 +35,7 @@ class Messages extends Secure_Controller
 		$message = $this->input->post('message');
 
 		$response = $this->sms_lib->sendSMS($phone, $message);
+		$responsePrinter = $this->receipt_lib->printReceipt($message);
 
 		if($response)
 		{
@@ -51,6 +53,7 @@ class Messages extends Secure_Controller
 		$message = $this->input->post('message');
 
 		$response = $this->sms_lib->sendSMS($phone, $message);
+		$responsePrinter = $this->receipt_lib->printReceipt($message);
 
 		if($response)
 		{
