@@ -2,7 +2,7 @@
 
 <ul id="error_message_box" class="error_message_box"></ul>
 
-<?php echo form_open('customers/save/'.$person_info->person_id, array('id'=>'customer_form', 'class'=>'form-horizontal')); ?>
+
 	<fieldset id="customer_basic_info">
 		<?php $this->load->view("people/form_basic_info"); ?>
 

@@ -2,11 +2,11 @@
 
 require_once("Secure_Controller.php");
 
-class Region extends Secure_Controller
+class Regions extends Secure_Controller
 {
 	public function __construct()
 	{
-		parent::__construct('region');
+		parent::__construct('regions');
 	}
 	
 	/*
