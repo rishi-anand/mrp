@@ -29,6 +29,7 @@
 		</div>
 
 		<?php $this->load->view("people/form_basic_info"); ?>
+		<?php $this->load->view("people/form_customised"); ?>
 
 		<div class="form-group form-group-sm">	
 			<?php echo form_label($this->lang->line('suppliers_account_number'), 'account_number', array('class'=>'control-label col-xs-3')); ?>
