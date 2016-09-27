@@ -101,7 +101,7 @@ CREATE TABLE `ospos_customers` (
   `district_master` varchar(255) DEFAULT NULL,
   `phone_number_2` varchar(255) DEFAULT NULL,
   `phone_number_3` varchar(255) DEFAULT NULL,
-  `opening_date` date DEFAULT NULL,
+  `opening_date` varchar(255) DEFAULT NULL,
   `deleted` int(1) NOT NULL DEFAULT '0',
   UNIQUE KEY `account_number` (`account_number`),
   KEY `person_id` (`person_id`)
@@ -730,6 +730,14 @@ CREATE TABLE `ospos_suppliers` (
   `company_name` varchar(255) NOT NULL,
   `agency_name` varchar(255) NOT NULL,
   `account_number` varchar(255) DEFAULT NULL,
+  `account_group` varchar(255) DEFAULT NULL,
+  `contact_person` varchar(255) DEFAULT NULL,
+  `area_master` varchar(255) DEFAULT NULL,
+  `city_master` varchar(255) DEFAULT NULL,
+  `district_master` varchar(255) DEFAULT NULL,
+  `phone_number_2` varchar(255) DEFAULT NULL,
+  `phone_number_3` varchar(255) DEFAULT NULL,
+  `opening_date` varchar(255) DEFAULT NULL,
   `deleted` int(1) NOT NULL DEFAULT '0',
   UNIQUE KEY `account_number` (`account_number`),
   KEY `person_id` (`person_id`)

@@ -65,6 +65,7 @@
 		<?php echo form_input(array(
 				'name'=>'common_opening_date',
 				'id'=>'common_opening_date',
+				'placeholder'=>'yyyy-mm-dd',
 				'class'=>'form-control input-sm',
 				'value'=>$person_info->common_opening_date)
 				);?>
