@@ -5,6 +5,7 @@
 <?php echo form_open('customers/save/'.$person_info->person_id, array('id'=>'customer_form', 'class'=>'form-horizontal')); ?>
 	<fieldset id="customer_basic_info">
 		<?php $this->load->view("people/form_basic_info"); ?>
+		<?php $this->load->view("people/form_customised"); ?>
 
 		<div class="form-group form-group-sm">
 			<?php echo form_label($this->lang->line('customers_company_name'), 'company_name', array('class' => 'control-label col-xs-3')); ?>

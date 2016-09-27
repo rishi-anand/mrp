@@ -63,3 +63,13 @@ $lang["common_export_excel_yes"] = "Yes";
 $lang["common_export_excel_no"] = "No";
 $lang["common_required"] = "Required";
 $lang["common_id"] = "Id";
+
+$lang["common_account_group"] = "Account Group";
+$lang["common_contact_person"] = "Contact Person";
+$lang["common_area_master"] = "Area Master";
+$lang["common_city_master"] = "City Master";
+$lang["common_district_master"] = "District Master";
+$lang["common_opening_date"] = "Opening Date";
+$lang["common_phone_number_2"] = "Phone Number";
+$lang["common_phone_number_3"] = "Cell Number";
+

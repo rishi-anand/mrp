@@ -103,6 +103,32 @@ CREATE TABLE `ospos_customers` (
 -- Dumping data for table `ospos_customers`
 --
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ospos_people_customised`
+--
+
+CREATE TABLE `ospos_people_customised` (
+  `person_id` int(10) NOT NULL,
+  `account_group` varchar(255) DEFAULT NULL,
+  `contact_person` varchar(255) DEFAULT NULL,
+  `area_master` varchar(255) DEFAULT NULL,
+  `city_master` varchar(255) DEFAULT NULL,
+  `district_master` varchar(255) DEFAULT NULL,
+  `phone_number_2` varchar(255) DEFAULT NULL,
+  `phone_number_3` varchar(255) DEFAULT NULL,
+  `opening_date` date DEFAULT NULL,
+  `deleted` int(1) NOT NULL DEFAULT '0',
+  UNIQUE KEY `phone_number_2` (`phone_number_2`),
+  KEY `person_id` (`person_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ospos_customers`
+--
+
+
 
 -- --------------------------------------------------------
 
