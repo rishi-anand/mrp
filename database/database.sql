@@ -94,23 +94,6 @@ CREATE TABLE `ospos_customers` (
   `account_number` varchar(255) DEFAULT NULL,
   `taxable` int(1) NOT NULL DEFAULT '1',
   `discount_percent` decimal(15,2) NOT NULL DEFAULT '0',
-  `deleted` int(1) NOT NULL DEFAULT '0',
-  UNIQUE KEY `account_number` (`account_number`),
-  KEY `person_id` (`person_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `ospos_customers`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ospos_people_customised`
---
-
-CREATE TABLE `ospos_people_customised` (
-  `person_id` int(10) NOT NULL,
   `account_group` varchar(255) DEFAULT NULL,
   `contact_person` varchar(255) DEFAULT NULL,
   `area_master` varchar(255) DEFAULT NULL,
@@ -120,15 +103,13 @@ CREATE TABLE `ospos_people_customised` (
   `phone_number_3` varchar(255) DEFAULT NULL,
   `opening_date` date DEFAULT NULL,
   `deleted` int(1) NOT NULL DEFAULT '0',
-  UNIQUE KEY `phone_number_2` (`phone_number_2`),
+  UNIQUE KEY `account_number` (`account_number`),
   KEY `person_id` (`person_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ospos_customers`
 --
-
-
 
 -- --------------------------------------------------------
 

@@ -117,7 +117,7 @@ class Customer extends Person
 	/*
 	Inserts or updates a customer
 	*/
-	public function save_customer(&$person_data, &$customer_data, $customised_data, $customer_id = FALSE)
+	public function save_customer(&$person_data, &$customer_data, $customer_id = FALSE)
 	{
 		$success = FALSE;
 
@@ -130,7 +130,6 @@ class Customer extends Person
 			{
 				$customer_data['person_id'] = $person_data['person_id'];
 				$success = $this->db->insert('customers', $customer_data);
-				$success = $this->db->insert('people_customised', $customised_data);
 			}
 			else
 			{
