@@ -94,11 +94,20 @@ class Customers extends Persons
 			'country' => $this->input->post('country'),
 			'comments' => $this->input->post('comments')
 		);
+		//echo $this->input->post('account_group');
 		$customer_data = array(
 			'account_number' => $this->input->post('account_number') == '' ? NULL : $this->input->post('account_number'),
 			'company_name' => $this->input->post('company_name') == '' ? NULL : $this->input->post('company_name'),
 			'discount_percent' => $this->input->post('discount_percent') == '' ? 0.00 : $this->input->post('discount_percent'),
-			'taxable' => $this->input->post('taxable') != NULL
+			'taxable' => $this->input->post('taxable') != NULL,
+			'account_group' => $this->input->post('account_group') == '' ? NULL : $this->input->post('account_group'),
+			'contact_person' => $this->input->post('contact_person') == '' ? NULL : $this->input->post('contact_person'),
+			'area_master' => $this->input->post('area_master') == '' ? 0.00 : $this->input->post('area_master'),
+			'city_master' => $this->input->post('city_master') == '' ? NULL : $this->input->post('city_master'),
+			'district_master' => $this->input->post('district_master') == '' ? NULL : $this->input->post('district_master'),
+			'opening_date' => $this->input->post('opening_date') == '' ? 0.00 : $this->input->post('opening_date'),
+			'phone_number_2' => $this->input->post('phone_number_2') == '' ? NULL : $this->input->post('phone_number_2'),
+			'phone_number_3' => $this->input->post('phone_number_3') == '' ? 0.00 : $this->input->post('phone_number_3')
 		);
 
 		if($this->Customer->save_customer($person_data, $customer_data, $customer_id))

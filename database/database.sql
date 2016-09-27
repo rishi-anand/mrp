@@ -94,6 +94,14 @@ CREATE TABLE `ospos_customers` (
   `account_number` varchar(255) DEFAULT NULL,
   `taxable` int(1) NOT NULL DEFAULT '1',
   `discount_percent` decimal(15,2) NOT NULL DEFAULT '0',
+  `account_group` varchar(255) DEFAULT NULL,
+  `contact_person` varchar(255) DEFAULT NULL,
+  `area_master` varchar(255) DEFAULT NULL,
+  `city_master` varchar(255) DEFAULT NULL,
+  `district_master` varchar(255) DEFAULT NULL,
+  `phone_number_2` varchar(255) DEFAULT NULL,
+  `phone_number_3` varchar(255) DEFAULT NULL,
+  `opening_date` date DEFAULT NULL,
   `deleted` int(1) NOT NULL DEFAULT '0',
   UNIQUE KEY `account_number` (`account_number`),
   KEY `person_id` (`person_id`)
@@ -102,7 +110,6 @@ CREATE TABLE `ospos_customers` (
 --
 -- Dumping data for table `ospos_customers`
 --
-
 
 -- --------------------------------------------------------
 
