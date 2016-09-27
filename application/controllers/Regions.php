@@ -8,6 +8,35 @@ class Regions extends Secure_Controller
 	{
 		parent::__construct('regions');
 	}
+
+	public function index()
+	{
+		echo "rakesh_cisco";
+
+		$data['table_headers'] = $this->xss_clean(get_people_manage_table_headers());
+
+		//$this->load->view('test/hello', $data);
+		$test=1;
+		$this->Region->exists($test);
+		$data = array(
+ 
+    'title'     =>   'Hello Himanshu!',
+    'content'   =>   'This is the content',
+    'posts'     =>   array('Post 1', 'Post 2', 'Post 3')
+ 
+);
+		//$this->load->view('partial/header', $data);
+		$this->load->view('test/hello', $data);
+		echo "rakesh_ram";
+	}
+		public function rishi()
+	{
+
+echo "rakesh_";
+		$this->Region->exists($data);
+		echo "rakesh";
+	}
+
 	
 	/*
 	Add the total cost and retail price to a passed items kit retrieving the data from each singular item part of the kit
@@ -31,13 +60,13 @@ class Regions extends Secure_Controller
 
 		return $item_kit;
 	}
-	
+	/*
 	public function index()
 	{
 		$data['table_headers'] = $this->xss_clean(get_item_kits_manage_table_headers());
 
 		$this->load->view('item_kits/manage', $data);
-	}
+	} */
 
 	/*
 	Returns Item kits table data rows. This will be called with AJAX.

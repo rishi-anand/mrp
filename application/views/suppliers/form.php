@@ -16,7 +16,7 @@
 			</div>
 		</div>
 
-		<div class="form-group form-group-sm">	
+		<div class="form-group form-group-sm">
 			<?php echo form_label($this->lang->line('suppliers_agency_name'), 'agency_name', array('class'=>'control-label col-xs-3')); ?>
 			<div class='col-xs-8'>
 				<?php echo form_input(array(

@@ -395,7 +395,8 @@ class Sales extends Secure_Controller
 				<script>
 				var sale_data = <?php echo json_encode($data, JSON_HEX_TAG); ?>;
 				sale_data = JSON.stringify(sale_data);
-				var url = "http://192.168.0.253/escpos-php-master/example/data.php?data="+sale_data;
+				var url = "http://192.168.0.253/rishi/mrp/extra/salereceipt.php?data="+sale_data;
+				console.log(url);
 				var xmlhttp = new XMLHttpRequest();
 				xmlhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {

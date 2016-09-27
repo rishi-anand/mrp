@@ -57,7 +57,7 @@ class Sms_lib
 			//textlocal
 			$success_status = "success";
 			$failure_status = "failure";
-			$debug_level_test = FALSE; // make it to 'TRUE' for enable debug
+			$debug_level_test = TRUE; // make it to 'TRUE' for enable debug
 			// when $debug_level_test is set to TRUE then you can see the json response in
 			// browser developer tools
 			
