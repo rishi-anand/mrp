@@ -1,0 +1,19 @@
+
+//to list all docker container
+docker ps
+
+
+// to stop all running docker
+docker stop $(docker ps -a -q)
+
+
+// to remove all running docker
+docker rm $(docker ps -a -q)
+
+
+//to build new changes
+docker-compose build
+
+
+//to run docker after build
+docker-compose up
