@@ -144,3 +144,27 @@ ALTER TABLE `ospos_suppliers`
 ALTER TABLE `ospos_giftcards`
   ADD CONSTRAINT `ospos_giftcards_ibfk_1` FOREIGN KEY (`person_id`) REFERENCES `ospos_people` (`person_id`);
 
+--
+-- Constraints for table `ospos_region_items`
+--
+
+ALTER TABLE `ospos_region_items`
+  ADD CONSTRAINT `ospos_region_items_ibfk_1` FOREIGN KEY (`region_id`) REFERENCES `ospos_regions` (`region_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `ospos_region_items_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `ospos_items` (`item_id`)  ON DELETE CASCADE;
+
+--
+-- Constraints for table `ospos_region_item_customers`
+--
+
+ALTER TABLE `ospos_region_item_customers`
+  ADD CONSTRAINT `ospos_region_item_customers_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `ospos_items` (`item_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `ospos_region_item_customers_ibfk_2` FOREIGN KEY (`person_id`) REFERENCES `ospos_customers` (`person_id`)  ON DELETE CASCADE;
+
+--
+-- Constraints for table `ospos_region_customers`
+--
+
+ALTER TABLE `ospos_region_customers`
+  ADD CONSTRAINT `ospos_region_customers_ibfk_1` FOREIGN KEY (`region_id`) REFERENCES `ospos_regions` (`region_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `ospos_region_customers_ibfk_2` FOREIGN KEY (`person_id`) REFERENCES `ospos_customers` (`person_id`)  ON DELETE CASCADE;
+
