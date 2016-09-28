@@ -324,7 +324,7 @@ INSERT INTO `ospos_modules` (`name_lang_key`, `desc_lang_key`, `sort`, `module_i
 ('module_reports', 'module_reports_desc', 50, 'reports'),
 ('module_sales', 'module_sales_desc', 10, 'sales'),
 ('module_suppliers', 'module_suppliers_desc', 40, 'suppliers'),
-('module_region', 'module_region_desc', 120, 'region');
+('module_regions', 'module_regions_desc', 120, 'regions');
 
 -- --------------------------------------------------------
 
@@ -397,7 +397,7 @@ INSERT INTO `ospos_permissions` (`permission_id`, `module_id`) VALUES
 ('sales', 'sales'),
 ('config', 'config'),
 ('suppliers', 'suppliers'),
-('region', 'region');
+('regions', 'regions');
 
 INSERT INTO `ospos_permissions` (`permission_id`, `module_id`, `location_id`) VALUES
 ('items_stock', 'items', 1),
@@ -447,7 +447,7 @@ INSERT INTO `ospos_grants` (`permission_id`, `person_id`) VALUES
 ('sales_stock', 1),
 ('receivings_stock', 1),
 ('suppliers', 1),
-('region', 1);
+('regions', 1);
 
 --
 -- Table structure for table `ospos_receivings`
