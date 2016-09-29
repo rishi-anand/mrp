@@ -86,7 +86,7 @@ class Regions extends Secure_Controller
 			'name' => $this->input->post('name'),
 			'description' => $this->input->post('description')
 		);
-		echo $region_data;
+		echo json_encode($region_data,true);
 		if($this->Region->save($region_data, $region_id))
 		{
 			$success = TRUE;
@@ -107,8 +107,9 @@ class Regions extends Secure_Controller
 					);
 				}
 
-                echo $region_items;
-                echo $region_id;
+                //echo $region_items;
+                echo json_encode($region_items,true);
+                //echo $region_id;
 				$success = $this->Region_items->save($region_items, $region_id);
 			}
 
