@@ -83,3 +83,24 @@
 {
 	text-align: center;
 }
+
+#region_items
+{
+	width: 100%;
+}
+
+#region_items thead tr
+{
+	background-color: #CCC;
+}
+
+#region_items th
+{
+	text-align: center;
+	font-weight: bold;
+}
+
+#region_items td
+{
+	text-align: center;
+}

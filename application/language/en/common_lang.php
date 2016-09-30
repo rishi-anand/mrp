@@ -31,6 +31,7 @@ $lang["common_list_of"] = "List of";
 $lang["common_logout"] = "Logout";
 $lang["common_new"] = "New";
 $lang["common_no_persons_to_display"] = "There are no people to display";
+$lang["regions_no_regions_to_display"] = "There are no regions to display";
 $lang["common_none_selected_text"] = "Nothing selected";
 $lang["common_or"] = "OR";
 $lang["common_phone_number"] = "Phone Number";

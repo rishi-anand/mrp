@@ -336,6 +336,19 @@ function get_item_kits_manage_table_headers()
 	return transform_headers($headers);
 }
 
+function get_regions_manage_table_headers()
+{
+	$CI =& get_instance();
+
+	$headers = array(
+		array('region_id' => $CI->lang->line('regions_kit')),
+		array('name' => $CI->lang->line('regions_name')),
+		array('description' => $CI->lang->line('regions_description'))
+	);
+
+	return transform_headers($headers);
+}
+
 function get_item_kit_data_row($item_kit, $controller)
 {
 	$CI =& get_instance();
@@ -348,6 +361,20 @@ function get_item_kit_data_row($item_kit, $controller)
 		'cost_price' => to_currency($item_kit->total_cost_price),
 		'unit_price' => to_currency($item_kit->total_unit_price),
 		'edit' => anchor($controller_name."/view/$item_kit->item_kit_id", '<span class="glyphicon glyphicon-edit"></span>',
+			array('class'=>'modal-dlg', 'data-btn-submit' => $CI->lang->line('common_submit'), 'title'=>$CI->lang->line($controller_name.'_update'))
+		));
+}
+
+function get_region_data_row($region, $controller)
+{
+	$CI =& get_instance();
+	$controller_name=strtolower(get_class($CI));
+
+	return array (
+		'region_id' => $region->region_id,
+		'name' => $region->name,
+		'description' => $region->description,
+		'edit' => anchor($controller_name."/view/$region->region_id", '<span class="glyphicon glyphicon-edit"></span>',
 			array('class'=>'modal-dlg', 'data-btn-submit' => $CI->lang->line('common_submit'), 'title'=>$CI->lang->line($controller_name.'_update'))
 		));
 }

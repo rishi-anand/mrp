@@ -295,6 +295,59 @@ CREATE TABLE IF NOT EXISTS `ospos_item_quantities` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ospos_regions`
+--
+
+CREATE TABLE `ospos_regions` (
+  `region_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  PRIMARY KEY (`region_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8  ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ospos_region_items`
+--
+
+CREATE TABLE `ospos_region_items` (
+  `region_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  PRIMARY KEY (`region_id`,`item_id`),
+  KEY `ospos_region_items_ibfk_2` (`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ospos_region_item_customers`
+--
+
+CREATE TABLE `ospos_region_item_customers` (
+  `item_id` int(11) NOT NULL,
+  `person_id` int(11) NOT NULL,
+  PRIMARY KEY (`item_id`,`person_id`),
+  KEY `ospos_region_item_customers_ibfk_2` (`person_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ospos_region_customers`
+--
+
+CREATE TABLE `ospos_region_customers` (
+  `region_id` int(11) NOT NULL,
+  `person_id` int(11) NOT NULL,
+  PRIMARY KEY (`region_id`,`person_id`),
+  KEY `ospos_region_customers_ibfk_2` (`person_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- --------------------------------------------------------
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ospos_modules`
 --
 
@@ -893,4 +946,29 @@ ALTER TABLE `ospos_suppliers`
 --
 ALTER TABLE `ospos_giftcards`
   ADD CONSTRAINT `ospos_giftcards_ibfk_1` FOREIGN KEY (`person_id`) REFERENCES `ospos_people` (`person_id`);
+
+--
+-- Constraints for table `ospos_region_items`
+--
+
+ALTER TABLE `ospos_region_items`
+  ADD CONSTRAINT `ospos_region_items_ibfk_1` FOREIGN KEY (`region_id`) REFERENCES `ospos_regions` (`region_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `ospos_region_items_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `ospos_items` (`item_id`)  ON DELETE CASCADE;
+
+--
+-- Constraints for table `ospos_region_item_customers`
+--
+
+ALTER TABLE `ospos_region_item_customers`
+  ADD CONSTRAINT `ospos_region_item_customers_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `ospos_items` (`item_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `ospos_region_item_customers_ibfk_2` FOREIGN KEY (`person_id`) REFERENCES `ospos_customers` (`person_id`)  ON DELETE CASCADE;
+
+--
+-- Constraints for table `ospos_region_customers`
+--
+
+ALTER TABLE `ospos_region_customers`
+  ADD CONSTRAINT `ospos_region_customers_ibfk_1` FOREIGN KEY (`region_id`) REFERENCES `ospos_regions` (`region_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `ospos_region_customers_ibfk_2` FOREIGN KEY (`person_id`) REFERENCES `ospos_customers` (`person_id`)  ON DELETE CASCADE;
+
 

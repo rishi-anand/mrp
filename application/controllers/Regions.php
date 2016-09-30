@@ -7,36 +7,20 @@ class Regions extends Secure_Controller
 	public function __construct()
 	{
 		parent::__construct('regions');
-	}
-	
-	/*
-	Add the total cost and retail price to a passed items kit retrieving the data from each singular item part of the kit
-	*/
-	private function _add_totals_to_item_kit($item_kit)
-	{
-		$item_kit->total_cost_price = 0;
-		$item_kit->total_unit_price = 0;
-		
-		foreach($this->Item_kit_items->get_info($item_kit->item_kit_id) as $item_kit_item)
-		{
-			$item_info = $this->Item->get_info($item_kit_item['item_id']);
-			foreach(get_object_vars($item_info) as $property => $value)
-			{
-				$item_info->$property = $this->xss_clean($value);
-			}
-			
-			$item_kit->total_cost_price += $item_info->cost_price * $item_kit_item['quantity'];
-			$item_kit->total_unit_price += $item_info->unit_price * $item_kit_item['quantity'];
-		}
-
-		return $item_kit;
+		$this->load->database();
 	}
 	
 	public function index()
 	{
-		$data['table_headers'] = $this->xss_clean(get_item_kits_manage_table_headers());
+		$data['table_headers'] = $this->xss_clean(get_regions_manage_table_headers());
 
-		$this->load->view('item_kits/manage', $data);
+		$this->load->view('regions/manage', $data);
+	}
+
+	public function console_log( $data ){
+		echo '<script>';
+		echo 'console.log('. json_encode( $data ) .')';
+		echo '</script>';
 	}
 
 	/*
@@ -50,15 +34,14 @@ class Regions extends Secure_Controller
 		$sort   = $this->input->get('sort');
 		$order  = $this->input->get('order');
 
-		$item_kits = $this->Item_kit->search($search, $limit, $offset, $sort, $order);
-		$total_rows = $this->Item_kit->get_found_rows($search);
+		$regions = $this->Region->search($search, $limit, $offset, $sort, $order);
+		$total_rows = $this->Region->get_found_rows($search);
 
 		$data_rows = array();
-		foreach($item_kits->result() as $item_kit)
+		foreach($regions->result() as $region)
 		{
 			// calculate the total cost and retail price of the Kit so it can be printed out in the manage table
-			$item_kit = $this->_add_totals_to_item_kit($item_kit);
-			$data_rows[] = get_item_kit_data_row($item_kit, $this);
+			$data_rows[] = get_region_data_row($region, $this);
 		}
 
 		$data_rows = $this->xss_clean($data_rows);
@@ -68,7 +51,7 @@ class Regions extends Secure_Controller
 
 	public function suggest_search()
 	{
-		$suggestions = $this->xss_clean($this->Item_kit->get_search_suggestions($this->input->post('term')));
+		$suggestions = $this->xss_clean($this->Region->get_search_suggestions($this->input->post('term')));
 
 		echo json_encode($suggestions);
 	}
@@ -76,83 +59,101 @@ class Regions extends Secure_Controller
 	public function get_row($row_id)
 	{
 		// calculate the total cost and retail price of the Kit so it can be added to the table refresh
-		$item_kit = $this->_add_totals_to_item_kit($this->Item_kit->get_info($row_id));
+		$region = $this->Region->get_info($row_id);
 		
-		echo json_encode(get_item_kit_data_row($item_kit, $this));
+		echo json_encode(get_region_data_row($region, $this));
 	}
 	
-	public function view($item_kit_id = -1)
+	public function view($region_id = -1)
 	{
-		$info = $this->Item_kit->get_info($item_kit_id);
+		$info = $this->Region->get_info($region_id);
 		foreach(get_object_vars($info) as $property => $value)
 		{
 			$info->$property = $this->xss_clean($value);
 		}
-		$data['item_kit_info']  = $info;
-		
+		$data['region_info']  = $info;
+		//echo json_encode($data,true);
 		$items = array();
-		foreach($this->Item_kit_items->get_info($item_kit_id) as $item_kit_item)
+		//echo json_encode($items,true);
+		//echo $region_id;
+		foreach($this->Region_items->get_info($region_id) as $region_item)
 		{
-			$item['name'] = $this->xss_clean($this->Item->get_info($item_kit_item['item_id'])->name);
-			$item['item_id'] = $this->xss_clean($item_kit_item['item_id']);
-			$item['quantity'] = $this->xss_clean($item_kit_item['quantity']);
+			echo json_encode($region_item,true);
+			$item['name'] = $this->xss_clean($this->Item->get_info($region_item['item_id'])->name);
+			$item['item_id'] = $this->xss_clean($region_item['item_id']);
 			
 			$items[] = $item;
 		}
-		$data['item_kit_items'] = $items;
+		//echo json_encode($items,true);
+		$data['region_items'] = $items;
+		//echo json_encode($data,true);
 
-		$this->load->view("item_kits/form", $data);
+		$this->load->view("regions/form", $data);
 	}
 	
-	public function save($item_kit_id = -1)
+	public function save($region_id = -1)
 	{
-		$item_kit_data = array(
+		$region_data = array(
 			'name' => $this->input->post('name'),
 			'description' => $this->input->post('description')
 		);
-		
-		if($this->Item_kit->save($item_kit_data, $item_kit_id))
+		echo json_encode($region_data,true);
+		//console_log( $region_data );
+		if($this->Region->save($region_data, $region_id))
 		{
 			$success = TRUE;
+			echo "rishi 1";
 			//New item kit
-			if ($item_kit_id == -1)
+			if ($region_id == -1)
 			{
-				$item_kit_id = $item_kit_data['item_kit_id'];
+				$region_id = $region_data['region_id'];
+				echo "rishi 2";
+				echo $region_data['region_id'];
 			}
 
-			if($this->input->post('item_kit_item') != NULL)
+			echo "region id :";
+			echo $region_id;
+			echo json_encode($this->input->post('region_item'),true);
+			
+			if($this->input->post('region_item') != NULL)
 			{
-				$item_kit_items = array();
-				foreach($this->input->post('item_kit_item') as $item_id => $quantity)
+				echo 'rishi';
+				$region_items = array();
+				foreach($this->input->post('region_item') as $item_id => $quantity)
 				{
-					$item_kit_items[] = array(
-						'item_id' => $item_id,
-						'quantity' => $quantity
+					
+					$region_items[] = array(
+						'item_id' => $item_id
 					);
 				}
 
-				$success = $this->Item_kit_items->save($item_kit_items, $item_kit_id);
+                //echo $region_items;
+                echo json_encode($region_items,true);
+                //echo $region_id;
+				$success = $this->Region_items->save($region_items, $region_id);
 			}
 
-			$item_kit_data = $this->xss_clean($item_kit_data);
+            
+            echo json_encode($region_items,true);
+			$region_data = $this->xss_clean($region_data);
 
 			echo json_encode(array('success' => $success,
-								'message' => $this->lang->line('item_kits_successful_adding').' '.$item_kit_data['name'], 'id' => $item_kit_id));
+								'message' => $this->lang->line('regions_successful_adding').' '.$region_data['name'].' ,'.$region_items['item_id'], 'id' => $region_id));
 		}
 		else//failure
 		{
 			$item_kit_data = $this->xss_clean($item_kit_data);
 
 			echo json_encode(array('success' => FALSE, 
-								'message' => $this->lang->line('item_kits_error_adding_updating').' '.$item_kit_data['name'], 'id' => -1));
+								'message' => $this->lang->line('regions_error_adding_updating').' '.$region_data['name'], 'id' => -1));
 		}
 	}
 	
 	public function delete()
 	{
-		$item_kits_to_delete = $this->xss_clean($this->input->post('ids'));
+		$regions_to_delete = $this->xss_clean($this->input->post('ids'));
 
-		if($this->Item_kit->delete_list($item_kits_to_delete))
+		if($this->Region->delete_list($regions_to_delete))
 		{
 			echo json_encode(array('success' => TRUE,
 								'message' => $this->lang->line('item_kits_successful_deleted').' '.count($item_kits_to_delete).' '.$this->lang->line('item_kits_one_or_multiple')));
