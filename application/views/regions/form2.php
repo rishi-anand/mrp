@@ -2,8 +2,8 @@
 
 <ul id="error_message_box" class="error_message_box"></ul>
 
-<?php echo form_open('regions/save/'.$region_info->region_id, array('id'=>'region_form', 'class'=>'form-horizontal')); ?>
-	<fieldset id="region_basic_info">
+<?php echo form_open('regions/save/'.$item_kit_info->item_kit_id, array('id'=>'region_form', 'class'=>'form-horizontal')); ?>
+	<fieldset id="item_kit_basic_info">
 		<div class="form-group form-group-sm">
 			<?php echo form_label($this->lang->line('regions_name'), 'name', array('class'=>'required control-label col-xs-3')); ?>
 			<div class='col-xs-8'>
@@ -11,7 +11,7 @@
 						'name'=>'name',
 						'id'=>'name',
 						'class'=>'form-control input-sm',
-						'value'=>$region_info->name)
+						'value'=>$item_kit_info->name)
 						);?>
 			</div>
 		</div>
@@ -23,7 +23,7 @@
 						'name'=>'description',
 						'id'=>'description',
 						'class'=>'form-control input-sm',
-						'value'=>$region_info->description)
+						'value'=>$item_kit_info->description)
 						);?>
 			</div>
 		</div>
@@ -39,23 +39,23 @@
 			</div>
 		</div>
 
-		<table id="region_items" class="table table-striped table-hover">
+		<table id="item_kit_items" class="table table-striped table-hover">
 			<thead>
 				<tr>
 					<th width="10%"><?php echo $this->lang->line('common_delete'); ?></th>
-					<th width="70%"><?php echo $this->lang->line('regions_item'); ?></th>
-					<th width="20%"><?php echo $this->lang->line('regions_quantity'); ?></th>
+					<th width="70%"><?php echo $this->lang->line('item_kits_item'); ?></th>
+					<th width="20%"><?php echo $this->lang->line('item_kits_quantity'); ?></th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
-				foreach($region_items as $region_item)
+				foreach($item_kit_items as $item_kit_item)
 				{
 				?>
 					<tr>
 						<td><a href='#' onclick='return delete_item_kit_row(this);'><span class='glyphicon glyphicon-trash'></span></a></td>
-						<td><?php echo $region_item['name']; ?></td>
-						<td><input class='quantity form-control input-sm' id='item_kit_item_<?php echo $region_item['item_id'] ?>' name=region_item[<?php echo $region_item['item_id'] ?>] value='<?php echo to_quantity_decimals($region_item['quantity']) ?>'/></td>
+						<td><?php echo $item_kit_item['name']; ?></td>
+						<td><input class='quantity form-control input-sm' id='item_kit_item_<?php echo $item_kit_item['item_id'] ?>' name=item_kit_item[<?php echo $item_kit_item['item_id'] ?>] value='<?php echo to_quantity_decimals($item_kit_item['quantity']) ?>'/></td>
 					</tr>
 				<?php
 				}
@@ -83,7 +83,7 @@ $(document).ready(function()
 			}
 			else
 			{
-				$("#region_items").append("<tr><td><a href='#' onclick='return delete_item_kit_row(this);'><span class='glyphicon glyphicon-trash'></span></a></td><td>" + ui.item.label + "</td><td><input class='quantity form-control input-sm' id='item_kit_item_" + ui.item.value + "' type='text' name=region_item[" + ui.item.value + "] value='1'/></td></tr>");
+				$("#item_kit_items").append("<tr><td><a href='#' onclick='return delete_item_kit_row(this);'><span class='glyphicon glyphicon-trash'></span></a></td><td>" + ui.item.label + "</td><td><input class='quantity form-control input-sm' id='item_kit_item_" + ui.item.value + "' type='text' name=item_kit_item[" + ui.item.value + "] value='1'/></td></tr>");
 			}
 			$("#item").val("");
 			return false;

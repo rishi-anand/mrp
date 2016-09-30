@@ -46,7 +46,6 @@ class Region extends CI_Model
 			{
 				$item_obj->$field = '';
 			}
-
 			return $item_obj;
 		}
 	}
@@ -99,7 +98,6 @@ class Region extends CI_Model
 	public function delete_list($region_ids)
 	{
 		$this->db->where_in('region_id', $region_ids);
-
 		return $this->db->delete('regions');
  	}
 

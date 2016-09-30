@@ -17,6 +17,12 @@ class Regions extends Secure_Controller
 		$this->load->view('regions/manage', $data);
 	}
 
+	public function console_log( $data ){
+		echo '<script>';
+		echo 'console.log('. json_encode( $data ) .')';
+		echo '</script>';
+	}
+
 	/*
 	Returns Item kits table data rows. This will be called with AJAX.
 	*/
@@ -66,16 +72,21 @@ class Regions extends Secure_Controller
 			$info->$property = $this->xss_clean($value);
 		}
 		$data['region_info']  = $info;
-		
+		//echo json_encode($data,true);
 		$items = array();
+		//echo json_encode($items,true);
+		//echo $region_id;
 		foreach($this->Region_items->get_info($region_id) as $region_item)
 		{
+			echo json_encode($region_item,true);
 			$item['name'] = $this->xss_clean($this->Item->get_info($region_item['item_id'])->name);
-			$item['item_id'] = $this->xss_clean($item_kit_item['item_id']);
+			$item['item_id'] = $this->xss_clean($region_item['item_id']);
 			
 			$items[] = $item;
 		}
+		//echo json_encode($items,true);
 		$data['region_items'] = $items;
+		//echo json_encode($data,true);
 
 		$this->load->view("regions/form", $data);
 	}
@@ -87,21 +98,30 @@ class Regions extends Secure_Controller
 			'description' => $this->input->post('description')
 		);
 		echo json_encode($region_data,true);
+		//console_log( $region_data );
 		if($this->Region->save($region_data, $region_id))
 		{
 			$success = TRUE;
+			echo "rishi 1";
 			//New item kit
 			if ($region_id == -1)
 			{
 				$region_id = $region_data['region_id'];
+				echo "rishi 2";
+				echo $region_data['region_id'];
 			}
 
+			echo "region id :";
+			echo $region_id;
+			echo json_encode($this->input->post('region_item'),true);
+			
 			if($this->input->post('region_item') != NULL)
 			{
+				echo 'rishi';
 				$region_items = array();
-				foreach($this->input->post('region_item') as $item_id)
+				foreach($this->input->post('region_item') as $item_id => $quantity)
 				{
-					echo $item_id;
+					
 					$region_items[] = array(
 						'item_id' => $item_id
 					);
@@ -113,7 +133,8 @@ class Regions extends Secure_Controller
 				$success = $this->Region_items->save($region_items, $region_id);
 			}
 
-            echo $region_data;
+            
+            echo json_encode($region_items,true);
 			$region_data = $this->xss_clean($region_data);
 
 			echo json_encode(array('success' => $success,
@@ -130,9 +151,9 @@ class Regions extends Secure_Controller
 	
 	public function delete()
 	{
-		$item_kits_to_delete = $this->xss_clean($this->input->post('ids'));
+		$regions_to_delete = $this->xss_clean($this->input->post('ids'));
 
-		if($this->Item_kit->delete_list($item_kits_to_delete))
+		if($this->Region->delete_list($regions_to_delete))
 		{
 			echo json_encode(array('success' => TRUE,
 								'message' => $this->lang->line('item_kits_successful_deleted').' '.count($item_kits_to_delete).' '.$this->lang->line('item_kits_one_or_multiple')));

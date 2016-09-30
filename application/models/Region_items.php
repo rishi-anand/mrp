@@ -11,6 +11,7 @@ class Region_items extends CI_Model
 		
 		//return an array of item kit items for an item
 		return $this->db->get()->result_array();
+		//echo json_encode($this->db->get()->result_array(),true);
 	}
 	
 	/*

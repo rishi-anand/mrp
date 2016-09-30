@@ -130,6 +130,7 @@ class Item_kits extends Secure_Controller
 						'quantity' => $quantity
 					);
 				}
+				//echo json_encode($item_kit_items,true);
 
 				$success = $this->Item_kit_items->save($item_kit_items, $item_kit_id);
 			}
