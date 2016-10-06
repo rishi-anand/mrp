@@ -2,34 +2,32 @@
 
 <ul id="error_message_box" class="error_message_box"></ul>
 
-<?php echo form_open('regions/save/'.$region_info->region_id, array('id'=>'region_form', 'class'=>'form-horizontal')); ?>
+<?php echo form_open('regions/save_item_person/'.$region_info->region_id, array('id'=>'region_form', 'class'=>'form-horizontal')); ?>
 	<fieldset id="region_basic_info">
 		<div class="form-group form-group-sm">
-			<?php echo form_label($this->lang->line('regions_name'), 'name', array('class'=>'required control-label col-xs-3')); ?>
+			<?php echo form_label($this->lang->line('regions_add_item'), 'item', array('class'=>'control-label col-xs-3')); ?>
 			<div class='col-xs-8'>
 				<?php echo form_input(array(
-						'name'=>'name',
-						'id'=>'name',
-						'class'=>'form-control input-sm',
-						'value'=>$region_info->name)
+						'name'=>'item',
+						'id'=>'item',
+						'class'=>'form-control input-sm')
 						);?>
 			</div>
 		</div>
 
 		<div class="form-group form-group-sm">
-			<?php echo form_label($this->lang->line('regions_description'), 'description', array('class'=>'control-label col-xs-3')); ?>
+			<?php echo form_label($this->lang->line('regions_person'), 'person', array('class'=>'control-label col-xs-3')); ?>
 			<div class='col-xs-8'>
 				<?php echo form_textarea(array(
 						'name'=>'description',
 						'id'=>'description',
-						'class'=>'form-control input-sm',
-						'value'=>$region_info->description)
+						'class'=>'form-control input-sm')
 						);?>
 			</div>
 		</div>
 
 		<div class="form-group form-group-sm">
-			<?php echo form_label($this->lang->line('regions_add_item'), 'item', array('class'=>'control-label col-xs-3')); ?>
+			<?php echo form_label($this->lang->line('regions_add_region'), 'region', array('class'=>'control-label col-xs-3')); ?>
 			<div class='col-xs-8'>
 				<?php echo form_input(array(
 						'name'=>'item',
@@ -67,8 +65,6 @@
 
 <script type="text/javascript">
 
-var link = '<?php echo site_url($controller_name."/view_item_cusomers"); ?>';
-console.log(link);
 //validation and submit handling
 $(document).ready(function()
 {
@@ -85,7 +81,7 @@ $(document).ready(function()
 			}
 			else
 			{
-				$("#region_items").append("<tr><td><a href='#' onclick='return delete_item_kit_row(this);'><span class='glyphicon glyphicon-trash'></span></a></td><td>" + ui.item.label + "</td><td><a href='"+ link +"'><input type='button' class='quantity form-control input-sm' id='item_kit_item_" + ui.item.value + "' type='text' name=region_item[" + ui.item.value + "] value='Add Customer'/><a></td></tr>");
+				$("#region_items").append("<tr><td><a href='#' onclick='return delete_item_kit_row(this);'><span class='glyphicon glyphicon-trash'></span></a></td><td>" + ui.item.label + "</td><td><input class='quantity form-control input-sm' id='item_kit_item_" + ui.item.value + "' type='text' name=region_item[" + ui.item.value + "] value='1'/></td></tr>");
 			}
 			$("#item").val("");
 			return false;

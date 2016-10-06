@@ -97,7 +97,8 @@ class Region extends CI_Model
 	*/
 	public function delete_list($region_ids)
 	{
-		$this->db->where_in('region_id', $region_ids);
+		echo json_encode($region_ids,true);
+		$this->db->where_in('regions.region_id', $region_ids);
 		return $this->db->delete('regions');
  	}
 

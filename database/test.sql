@@ -1,3 +1,20 @@
+CREATE TABLE `ospos_regions_new` (
+  `region_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  PRIMARY KEY (`region_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+
+CREATE TABLE `ospos_region_items_persons` (
+  `region_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `person_id` int(11) NOT NULL,
+  PRIMARY KEY (`region_id`,`item_id`),
+  KEY `ospos_region_items_ibfk_2` (`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 CREATE TABLE `ospos_regions` (
   `region_id` int(11) NOT NULL AUTO_INCREMENT,

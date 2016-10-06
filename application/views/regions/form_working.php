@@ -67,8 +67,6 @@
 
 <script type="text/javascript">
 
-var link = '<?php echo site_url($controller_name."/view_item_cusomers"); ?>';
-console.log(link);
 //validation and submit handling
 $(document).ready(function()
 {
@@ -85,7 +83,7 @@ $(document).ready(function()
 			}
 			else
 			{
-				$("#region_items").append("<tr><td><a href='#' onclick='return delete_item_kit_row(this);'><span class='glyphicon glyphicon-trash'></span></a></td><td>" + ui.item.label + "</td><td><a href='"+ link +"'><input type='button' class='quantity form-control input-sm' id='item_kit_item_" + ui.item.value + "' type='text' name=region_item[" + ui.item.value + "] value='Add Customer'/><a></td></tr>");
+				$("#region_items").append("<tr><td><a href='#' onclick='return delete_item_kit_row(this);'><span class='glyphicon glyphicon-trash'></span></a></td><td>" + ui.item.label + "</td><td><input class='quantity form-control input-sm' id='item_kit_item_" + ui.item.value + "' type='text' name=region_item[" + ui.item.value + "] value='1'/></td></tr>");
 			}
 			$("#item").val("");
 			return false;

@@ -78,7 +78,7 @@ class Regions extends Secure_Controller
 		//echo $region_id;
 		foreach($this->Region_items->get_info($region_id) as $region_item)
 		{
-			echo json_encode($region_item,true);
+			//echo json_encode($region_item,true);
 			$item['name'] = $this->xss_clean($this->Item->get_info($region_item['item_id'])->name);
 			$item['item_id'] = $this->xss_clean($region_item['item_id']);
 			
@@ -90,6 +90,72 @@ class Regions extends Secure_Controller
 
 		$this->load->view("regions/form", $data);
 	}
+
+		public function view_item_person($region_id = -1)
+	   {
+		$info = $this->Region->get_info($region_id);
+		foreach(get_object_vars($info) as $property => $value)
+		{
+			$info->$property = $this->xss_clean($value);
+		}
+		$data['region_info']  = $info;
+		//echo json_encode($data,true);
+		$items = array();
+		//echo json_encode($items,true);
+		//echo $region_id;
+		foreach($this->Region_items->get_info($region_id) as $region_item)
+		{
+			echo json_encode($region_item,true);
+			$item['name'] = $this->xss_clean($this->Item->get_info($region_item['item_id'])->name);
+			$item['item_id'] = $this->xss_clean($region_item['item_id']);
+			
+			$items[] = $item;
+		}
+		//echo json_encode($items,true);
+		$data['region_items'] = $items;
+		//echo json_encode($data,true);
+
+		$this->load->view("regions/add_item_person", $data);
+	   }
+
+		public function view_item_cusomers($item_id = -1)
+	   {
+	   	echo 'rishi';
+	   		if($this->input->post('region_item') != NULL)
+			{
+				echo 'rishi';
+				$region_items = array();
+				foreach($this->input->post('region_item') as $item_id => $quantity)
+				{
+					
+					$region_items[] = array(
+						'item_id' => $item_id
+					);
+				}
+
+                //echo $region_items;
+                echo json_encode($region_items,true);
+                //echo $region_id;
+				//$success = $this->Region_items->save($region_items, $region_id);
+			}
+		//echo json_encode($data,true);
+		$customers = array();
+		//echo json_encode($items,true);
+		//echo $region_id;
+		$item_id = 1;
+		foreach($this->Region_item_customers->get_info($item_id) as $item_customer)
+		{
+			//echo json_encode($item_customer,true);
+			$customer['name'] = $this->xss_clean($this->Customer->get_info($item_customer['person_id'])->name);
+			$customer['person_id'] = $this->xss_clean($item_customer['person_id']);
+			$customers[] = $customer;
+		}
+		//echo json_encode($items,true);
+		$data['item_customers'] = $customers;
+		//echo json_encode($data,true);
+
+		$this->load->view("regions/customer", $customers);
+	   }
 	
 	public function save($region_id = -1)
 	{
@@ -97,23 +163,17 @@ class Regions extends Secure_Controller
 			'name' => $this->input->post('name'),
 			'description' => $this->input->post('description')
 		);
-		echo json_encode($region_data,true);
 		//console_log( $region_data );
 		if($this->Region->save($region_data, $region_id))
 		{
 			$success = TRUE;
-			echo "rishi 1";
 			//New item kit
 			if ($region_id == -1)
 			{
 				$region_id = $region_data['region_id'];
-				echo "rishi 2";
-				echo $region_data['region_id'];
+				//echo "rishi 2";
+				//echo $region_data['region_id'];
 			}
-
-			echo "region id :";
-			echo $region_id;
-			echo json_encode($this->input->post('region_item'),true);
 			
 			if($this->input->post('region_item') != NULL)
 			{
@@ -147,6 +207,35 @@ class Regions extends Secure_Controller
 			echo json_encode(array('success' => FALSE, 
 								'message' => $this->lang->line('regions_error_adding_updating').' '.$region_data['name'], 'id' => -1));
 		}
+	}
+
+		public function save_item_person($region_id = -1)
+	{		
+			if($this->input->post('region_item') != NULL)
+			{
+				echo 'rishi';
+				$region_items = array();
+				foreach($this->input->post('region_item') as $item_id => $quantity)
+				{
+					
+					$region_items[] = array(
+						'item_id' => $item_id
+					);
+				}
+
+                //echo $region_items;
+                echo json_encode($region_items,true);
+                //echo $region_id;
+				$success = $this->Region_items->save($region_items, $region_id);
+			}
+
+            
+            echo json_encode($region_items,true);
+			$region_data = $this->xss_clean($region_data);
+
+			echo json_encode(array('success' => $success,
+								'message' => $this->lang->line('regions_successful_adding').' '.$region_data['name'].' ,'.$region_items['item_id'], 'id' => $region_id));
+		
 	}
 	
 	public function delete()
