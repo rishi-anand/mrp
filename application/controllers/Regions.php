@@ -7,8 +7,40 @@ class Regions extends Secure_Controller
 	public function __construct()
 	{
 		parent::__construct('regions');
+<<<<<<< HEAD:application/controllers/Regions.php
 		$this->load->database();
+=======
+>>>>>>> receipt:application/controllers/Regions.php
 	}
+
+	public function index()
+	{
+		echo "rakesh_cisco";
+
+		$data['table_headers'] = $this->xss_clean(get_people_manage_table_headers());
+
+		//$this->load->view('test/hello', $data);
+		$test=1;
+		$this->Region->exists($test);
+		$data = array(
+ 
+    'title'     =>   'Hello Himanshu!',
+    'content'   =>   'This is the content',
+    'posts'     =>   array('Post 1', 'Post 2', 'Post 3')
+ 
+);
+		//$this->load->view('partial/header', $data);
+		$this->load->view('test/hello', $data);
+		echo "rakesh_ram";
+	}
+		public function rishi()
+	{
+
+echo "rakesh_";
+		$this->Region->exists($data);
+		echo "rakesh";
+	}
+
 	
 	public function index()
 	{
@@ -16,12 +48,22 @@ class Regions extends Secure_Controller
 
 		$this->load->view('regions/manage', $data);
 	}
+<<<<<<< HEAD:application/controllers/Regions.php
 
 	public function console_log( $data ){
 		echo '<script>';
 		echo 'console.log('. json_encode( $data ) .')';
 		echo '</script>';
 	}
+=======
+	/*
+	public function index()
+	{
+		$data['table_headers'] = $this->xss_clean(get_item_kits_manage_table_headers());
+
+		$this->load->view('item_kits/manage', $data);
+	} */
+>>>>>>> receipt:application/controllers/Regions.php
 
 	/*
 	Returns Item kits table data rows. This will be called with AJAX.
