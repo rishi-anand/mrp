@@ -15,6 +15,7 @@ $data = $_GET["data"];
 
 $data = (array) json_decode($data);
 if($data["print_after_sale"] == true){
+  
     $printer -> selectPrintMode(Printer::MODE_DOUBLE_HEIGHT);
     $printer -> text($data["customer_address"]."\n");
     //$printer -> text("IAMRISHIANANDANDWHOAREYOUTHISISC"."\n");
@@ -32,8 +33,9 @@ if($data["print_after_sale"] == true){
         while(strlen($value["name"]) > 25){
           $value["name"] = substr($value["name"], 0, 24);
         }
-        $value["price"] = floor($value["price"] * 10) / 10;
-        $value["total"] = floor($value["total"] * 10) / 10;
+
+        $value["price"] = number_format($value["price"], 2, '.', '');
+        $value["total"] = number_format($value["total"], 2, '.', '');
         $sentence = $value["name"] ."/". $value["price"];
         $length_sentence = strlen($sentence);
 
@@ -83,6 +85,7 @@ if($data["print_after_sale"] == true){
             }
         }
     }
+    $data["total"] = number_format($data["total"], 2, '.', '');
     $printer -> text("--------------------------------"."\n");
     $printer -> text("          TOTAL          : ".$data["total"]."\n");
     $printer -> text("--------------------------------"."\n");
