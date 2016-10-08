@@ -43,43 +43,43 @@ if($data["print_after_sale"] == true){
           $length_line1 = strlen($line1);
 
             if( $length_line1 <= 10 && $length_line1 > 7 ){
-              $printer -> text($line1."          ".$value["quantity"]."    ".$value["total"]."\n");
+              $printer -> text($line1."          ".$value["quantity"]."     ".$value["total"]."\n");
               $printer -> text($line2."\n");
             }
             if( $length_line1 <= 12 && $length_line1 > 10 ){
-              $printer -> text($line1."        ".$value["quantity"]."    ".$value["total"]."\n");
+              $printer -> text($line1."        ".$value["quantity"]."     ".$value["total"]."\n");
               $printer -> text($line2."\n");
             }
             if( $length_line1 <= 14 && $length_line1 > 12 ){
-              $printer -> text($line1."      ".$value["quantity"]."    ".$value["total"]."\n");
+              $printer -> text($line1."      ".$value["quantity"]."     ".$value["total"]."\n");
               $printer -> text($line2."\n");
             }
             if( $length_line1 < 16 && $length_line1 > 14 ){
-              $printer -> text($line1."    ".$value["quantity"]."    ".$value["total"]."\n");
+              $printer -> text($line1."    ".$value["quantity"]."     ".$value["total"]."\n");
               $printer -> text($line2."\n");
             }
-            if( $length_line1 >= 16 ){
-              $printer -> text($line1."   ".$value["quantity"]."    ".$value["total"]."\n");
+            if( $length_line1 >= 16 ){ 
+              $printer -> text($line1."   ".$value["quantity"]."     ".$value["total"]."\n");
               $printer -> text($line2."\n");
             }
         }else{
             if( $length_sentence <= 7 ){
-              $printer -> text($sentence."             ".$value["quantity"]."    ".$value["total"]."\n");
+              $printer -> text($sentence."             ".$value["quantity"]."     ".$value["total"]."\n");
             }
             if( $length_sentence <= 10 && $length_sentence > 7 ){
-              $printer -> text($sentence."          ".$value["quantity"]."    ".$value["total"]."\n");
+              $printer -> text($sentence."          ".$value["quantity"]."     ".$value["total"]."\n");
             }
             if( $length_sentence <= 12 && $length_sentence > 10 ){
-              $printer -> text($sentence."        ".$value["quantity"]."    ".$value["total"]."\n");
+              $printer -> text($sentence."        ".$value["quantity"]."     ".$value["total"]."\n");
             }
             if( $length_sentence <= 14 && $length_sentence > 12 ){
-              $printer -> text($sentence."      ".$value["quantity"]."    ".$value["total"]."\n");
+              $printer -> text($sentence."      ".$value["quantity"]."     ".$value["total"]."\n");
             }
             if( $length_sentence < 16 && $length_sentence > 14 ){
-              $printer -> text($sentence."    ".$value["quantity"]."    ".$value["total"]."\n");
+              $printer -> text($sentence."    ".$value["quantity"]."     ".$value["total"]."\n");
             }
             if( $length_sentence >= 16 ){
-              $printer -> text($sentence."   ".$value["quantity"]."    ".$value["total"]."\n");
+              $printer -> text($sentence."   ".$value["quantity"]."     ".$value["total"]."\n");
             }
         }
     }
