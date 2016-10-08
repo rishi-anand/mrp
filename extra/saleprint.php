@@ -15,14 +15,59 @@ $data = $_GET["data"];
 
 $data = (array) json_decode($data);
 if($data["print_after_sale"] == true){
-  
+
     $printer -> selectPrintMode(Printer::MODE_DOUBLE_HEIGHT);
-    $printer -> text($data["customer_address"]."\n");
+
+    $data["company_info"] = explode("\n", $data["company_info"], 2)[0];
+
+    $length_company = strlen($data["company_info"]);
+    if( $length_company < 3 && $length_company > 28 ){
+      $data["company_info"] = "MRP Solutions";
+    }
+    
+    if( $length_company <= 4 && $length_company >= 3 ){
+      $printer -> text("              ".$data["company_info"]."\n");
+    }
+    if( $length_company <= 7 && $length_company > 4 ){
+      $printer -> text("            ".$data["company_info"]."\n");
+    }
+    if( $length_company <= 10 && $length_company > 7 ){
+      $printer -> text("           ".$data["company_info"]."\n");
+    }
+    if( $length_company <= 12 && $length_company > 10 ){
+      $printer -> text("          ".$data["company_info"]."\n");
+    }
+    if( $length_company <= 14 && $length_company > 12 ){
+      $printer -> text("         ".$data["company_info"]."\n");
+    }
+    if( $length_company <= 16 && $length_company > 14 ){
+      $printer -> text("        ".$data["company_info"]."\n");
+    }    
+    if( $length_company <= 18 && $length_company > 16 ){
+      $printer -> text("       ".$data["company_info"]."\n");
+    }
+    if( $length_company <= 20 && $length_company > 18 ){
+      $printer -> text("      ".$data["company_info"]."\n");
+    }
+    if( $length_company <= 22 && $length_company > 20 ){
+      $printer -> text("     ".$data["company_info"]."\n");
+    }
+    if( $length_company <= 24 && $length_company > 22 ){
+      $printer -> text("    ".$data["company_info"]."\n");
+    }
+    if( $length_company <= 26 && $length_company > 24 ){
+      $printer -> text("   ".$data["company_info"]."\n");
+    }
+    if( $length_company > 26 ){
+      $printer -> text("  ".$data["company_info"]."\n");
+    }
+
+
     //$printer -> text("IAMRISHIANANDANDWHOAREYOUTHISISC"."\n");
     $printer -> feed(1);
     $printer -> selectPrintMode(Printer::MODE_FONT_A);
     $printer -> text("--------------------------------"."\n");
-    $printer -> text("NAME/             QTY     PRICE"."\n");
+    $printer -> text("NAME/             QTY    PRICE"."\n");
     $printer -> text("PRICE-UNIT"."\n");
     $printer -> text("--------------------------------"."\n");
     $printer -> selectPrintMode(Printer::MODE_FONT_A);
@@ -45,49 +90,49 @@ if($data["print_after_sale"] == true){
           $length_line1 = strlen($line1);
 
             if( $length_line1 <= 10 && $length_line1 > 7 ){
-              $printer -> text($line1."          ".$value["quantity"]."     ".$value["total"]."\n");
+              $printer -> text($line1."          ".$value["quantity"]."    ".$value["total"]."\n");
               $printer -> text($line2."\n");
             }
             if( $length_line1 <= 12 && $length_line1 > 10 ){
-              $printer -> text($line1."        ".$value["quantity"]."     ".$value["total"]."\n");
+              $printer -> text($line1."        ".$value["quantity"]."    ".$value["total"]."\n");
               $printer -> text($line2."\n");
             }
             if( $length_line1 <= 14 && $length_line1 > 12 ){
-              $printer -> text($line1."      ".$value["quantity"]."     ".$value["total"]."\n");
+              $printer -> text($line1."      ".$value["quantity"]."    ".$value["total"]."\n");
               $printer -> text($line2."\n");
             }
             if( $length_line1 < 16 && $length_line1 > 14 ){
-              $printer -> text($line1."    ".$value["quantity"]."     ".$value["total"]."\n");
+              $printer -> text($line1."    ".$value["quantity"]."    ".$value["total"]."\n");
               $printer -> text($line2."\n");
             }
             if( $length_line1 >= 16 ){ 
-              $printer -> text($line1."   ".$value["quantity"]."     ".$value["total"]."\n");
+              $printer -> text($line1."   ".$value["quantity"]."    ".$value["total"]."\n");
               $printer -> text($line2."\n");
             }
         }else{
             if( $length_sentence <= 7 ){
-              $printer -> text($sentence."             ".$value["quantity"]."     ".$value["total"]."\n");
+              $printer -> text($sentence."             ".$value["quantity"]."    ".$value["total"]."\n");
             }
             if( $length_sentence <= 10 && $length_sentence > 7 ){
-              $printer -> text($sentence."          ".$value["quantity"]."     ".$value["total"]."\n");
+              $printer -> text($sentence."          ".$value["quantity"]."    ".$value["total"]."\n");
             }
             if( $length_sentence <= 12 && $length_sentence > 10 ){
-              $printer -> text($sentence."        ".$value["quantity"]."     ".$value["total"]."\n");
+              $printer -> text($sentence."        ".$value["quantity"]."    ".$value["total"]."\n");
             }
             if( $length_sentence <= 14 && $length_sentence > 12 ){
-              $printer -> text($sentence."      ".$value["quantity"]."     ".$value["total"]."\n");
+              $printer -> text($sentence."      ".$value["quantity"]."    ".$value["total"]."\n");
             }
             if( $length_sentence < 16 && $length_sentence > 14 ){
-              $printer -> text($sentence."    ".$value["quantity"]."     ".$value["total"]."\n");
+              $printer -> text($sentence."    ".$value["quantity"]."    ".$value["total"]."\n");
             }
             if( $length_sentence >= 16 ){
-              $printer -> text($sentence."   ".$value["quantity"]."     ".$value["total"]."\n");
+              $printer -> text($sentence."   ".$value["quantity"]."    ".$value["total"]."\n");
             }
         }
     }
     $data["total"] = number_format($data["total"], 2, '.', '');
     $printer -> text("--------------------------------"."\n");
-    $printer -> text("          TOTAL          : ".$data["total"]."\n");
+    $printer -> text("         TOTAL        : ".$data["total"]."\n");
     $printer -> text("--------------------------------"."\n");
     $printer -> feed(1);
     $printer -> text("* Thank You.Please Visit Again *"."\n");
