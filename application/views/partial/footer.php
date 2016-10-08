@@ -11,10 +11,10 @@
 		</div>
 	</div>
 
-	<div id="footer" style="position:fixed;font-size:11px;color:#777;clear:both;bottom:0;left:0;height:40px;width:100%;">
-		<div class="jumbotron push-spaces">
+	<div id="footer" style="position:relative;font-size:11px;color:#777;clear:both;bottom:0;left:0;height:40px;width:100%;">
+
 			<center><strong>MRP Solutions</strong></center>
-		</div>
+
 	</div>
 
 	<script>
