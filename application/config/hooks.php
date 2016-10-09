@@ -18,10 +18,3 @@ $hook['post_controller_constructor'][] = array(
                                     'filepath' => 'hooks'
                                 );
 
-$hook['post_controller_constructor'][] = array(
-                                    'class'    => '',
-                                    'function' => 'load_stats',
-                                    'filename' => 'load_stats.php',
-                                    'filepath' => 'hooks'
-                                );
-
