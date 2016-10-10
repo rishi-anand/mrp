@@ -383,10 +383,10 @@ class Config extends Secure_Controller
 			'print_right_margin' => $this->input->post('print_right_margin'),
 			'receipt_set_thank_you_message' => $this->input->post('receipt_set_thank_you_message')
 		);
-		$this->session->set_userdata($batch_save_data);
+		
     	$result = $this->Appconfig->batch_save($batch_save_data);
     	$success = $result ? TRUE : FALSE;
-
+        $this->session->set_userdata($batch_save_data);
     	echo json_encode(array('success' => $success, 'message' => $this->lang->line('config_saved_' . ($success ? '' : 'un') . 'successfully')));
     }
 
