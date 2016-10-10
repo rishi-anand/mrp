@@ -395,7 +395,8 @@ class Sales extends Secure_Controller
 			$data['receipt_show_employee_name'] = $this->session->userdata('receipt_show_employee_name');
 			$data['receipt_show_seller_address'] = $this->session->userdata('receipt_show_seller_address');
 			$data['receipt_show_seller_phone_number'] = $this->session->userdata('receipt_show_seller_phone_number');
-			$data['receipt_show_serialnumber'] = $this->session->userdata('eceipt_show_serialnumber');
+			$data['receipt_show_serialnumber'] = $this->session->userdata('receipt_show_serialnumber');
+			$data['receipt_set_thank_you_message'] = $this->session->userdata('receipt_set_thank_you_message');
 
 			if($this->sale_lib->is_invoice_number_enabled())
 			{

@@ -15,7 +15,8 @@ class Home extends Secure_Controller
 			'receipt_show_employee_name' => $this->Appconfig->get('receipt_show_employee_name'),
 			'receipt_show_seller_address' => $this->Appconfig->get('receipt_show_seller_address'),
 			'receipt_show_seller_phone_number' => $this->Appconfig->get('receipt_show_seller_phone_number'),
-			'receipt_show_serialnumber' => $this->Appconfig->get('receipt_show_serialnumber')
+			'receipt_show_serialnumber' => $this->Appconfig->get('receipt_show_serialnumber'),
+			'receipt_set_thank_you_message' => $this->Appconfig->get('receipt_set_thank_you_message')
 		);
 		$this->session->set_userdata($batch_save_data);
 	}

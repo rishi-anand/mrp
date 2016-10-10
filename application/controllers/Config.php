@@ -380,7 +380,8 @@ class Config extends Secure_Controller
 			'print_top_margin' => $this->input->post('print_top_margin'),
 			'print_left_margin' => $this->input->post('print_left_margin'),
 			'print_bottom_margin' => $this->input->post('print_bottom_margin'),
-			'print_right_margin' => $this->input->post('print_right_margin')
+			'print_right_margin' => $this->input->post('print_right_margin'),
+			'receipt_set_thank_you_message' => $this->input->post('receipt_set_thank_you_message')
 		);
 		$this->session->set_userdata($batch_save_data);
     	$result = $this->Appconfig->batch_save($batch_save_data);

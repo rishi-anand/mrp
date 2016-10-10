@@ -186,3 +186,4 @@ $lang["config_receipt_show_date"] = "Show Date";
 $lang["config_receipt_show_seller_phone_number"] = "Show Seller Phone Number";
 $lang["config_receipt_show_seller_address"] = "Show Seller Address";
 $lang["config_receipt_set_thank_you_message"] = "Set Thank You Message";
+$lang["config_receipt_set_thank_you_message_placeholder"] = "* Thank You.Please Visit Again *";

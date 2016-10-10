@@ -59,6 +59,7 @@ INSERT INTO `ospos_app_config` (`key`, `value`) VALUES
 ('print_left_margin', '0'),
 ('print_bottom_margin', '0'),
 ('print_right_margin', '0'),
+('receipt_set_thank_you_message', '* Thank You.Please Visit Again *'),
 ('default_sales_discount', '0'),
 ('lines_per_page', '25'),
 ('dateformat', 'm/d/Y'),

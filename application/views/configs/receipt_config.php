@@ -49,7 +49,7 @@
 				</div>
 			</div>
 			<!-- new config starts here -->
-			
+
 			<div class="form-group form-group-sm">	
 				<?php echo form_label($this->lang->line('config_receipt_show_date'), 'receipt_show_date', array('class' => 'control-label col-xs-2')); ?>
 				<div class='col-xs-1'>
@@ -229,6 +229,21 @@
 				</div>
 			</div>
 
+			<div class="form-group form-group-sm">	
+				<?php echo form_label($this->lang->line('config_receipt_set_thank_you_message'), 'receipt_set_thank_you_message', array('class' => 'control-label col-xs-2')); ?>
+				<div class="col-xs-4">
+					<div class="input-group">
+						<span class="input-group-addon input-sm"><span class="glyphicon glyphicon-bullhorn"></span></span>
+						<?php echo form_input(array(
+							'name' => 'receipt_set_thank_you_message',
+							'id' => 'receipt_set_thank_you_message',
+							'class' => 'form-control input-sm required',
+							'value'=>$this->config->item('receipt_set_thank_you_message') == null ? $this->config->item('receipt_set_thank_you_message') : $this->config->item('receipt_set_thank_you_message'),
+							'placeholder'=>$this->lang->line('config_receipt_set_thank_you_message_placeholder')));?>
+					</div>
+				</div>
+			</div>
+
 			<?php echo form_submit(array(
 				'name' => 'submit_form',
 				'id' => 'submit_form',
@@ -273,9 +288,6 @@ $(document).ready(function()
 	$('#receipt_config_form').validate($.extend(form_support.handler, {
 		submitHandler: function(form) {
 			$(form).ajaxSubmit({
-				beforeSerialize: function(arr, $form, options) {
-					return ( dialog_confirmed || confirm('<?php echo $this->lang->line('config_jsprintsetup_required'); ?>') );
-				},
 				success: function(response) {
 					$.notify(response.message, { type: response.success ? 'success' : 'danger'} );
 				},
