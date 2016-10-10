@@ -369,6 +369,10 @@ class Config extends Secure_Controller
 			'receipt_show_taxes' => $this->input->post('receipt_show_taxes') != NULL,
 			'receipt_show_total_discount' => $this->input->post('receipt_show_total_discount') != NULL,
 			'receipt_show_description' => $this->input->post('receipt_show_description') != NULL,
+			'receipt_show_date' => $this->input->post('receipt_show_date') != NULL,
+			'receipt_show_employee_name' => $this->input->post('receipt_show_employee_name') != NULL,
+			'receipt_show_seller_address' => $this->input->post('receipt_show_seller_address') != NULL,
+			'receipt_show_seller_phone_number' => $this->input->post('receipt_show_seller_phone_number') != NULL,
 			'receipt_show_serialnumber' => $this->input->post('receipt_show_serialnumber') != NULL,
 			'print_silently' => $this->input->post('print_silently') != NULL,
 			'print_header' => $this->input->post('print_header') != NULL,
@@ -378,7 +382,7 @@ class Config extends Secure_Controller
 			'print_bottom_margin' => $this->input->post('print_bottom_margin'),
 			'print_right_margin' => $this->input->post('print_right_margin')
 		);
-
+		$this->session->set_userdata($batch_save_data);
     	$result = $this->Appconfig->batch_save($batch_save_data);
     	$success = $result ? TRUE : FALSE;
 

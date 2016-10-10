@@ -48,6 +48,53 @@
 						'checked'=>$this->config->item('receipt_show_description'))); ?>
 				</div>
 			</div>
+			<!-- new config starts here -->
+			
+			<div class="form-group form-group-sm">	
+				<?php echo form_label($this->lang->line('config_receipt_show_date'), 'receipt_show_date', array('class' => 'control-label col-xs-2')); ?>
+				<div class='col-xs-1'>
+					<?php echo form_checkbox(array(
+						'name' => 'receipt_show_date',
+						'value' => 'receipt_show_date',
+						'id' => 'receipt_show_date',
+						'checked'=>$this->config->item('receipt_show_date'))); ?>
+				</div>
+			</div>
+
+			<div class="form-group form-group-sm">	
+				<?php echo form_label($this->lang->line('config_receipt_show_employee_name'), 'receipt_show_employee_name', array('class' => 'control-label col-xs-2')); ?>
+				<div class='col-xs-1'>
+					<?php echo form_checkbox(array(
+						'name' => 'receipt_show_employee_name',
+						'value' => 'receipt_show_employee_name',
+						'id' => 'receipt_show_employee_name',
+						'checked'=>$this->config->item('receipt_show_employee_name'))); ?>
+				</div>
+			</div>
+
+			<div class="form-group form-group-sm">	
+				<?php echo form_label($this->lang->line('config_receipt_show_seller_address'), 'receipt_show_seller_address', array('class' => 'control-label col-xs-2')); ?>
+				<div class='col-xs-1'>
+					<?php echo form_checkbox(array(
+						'name' => 'receipt_show_seller_address',
+						'value' => 'receipt_show_seller_address',
+						'id' => 'receipt_show_seller_address',
+						'checked'=>$this->config->item('receipt_show_seller_address'))); ?>
+				</div>
+			</div>
+
+			<div class="form-group form-group-sm">	
+				<?php echo form_label($this->lang->line('config_receipt_show_seller_phone_number'), 'receipt_show_seller_phone_number', array('class' => 'control-label col-xs-2')); ?>
+				<div class='col-xs-1'>
+					<?php echo form_checkbox(array(
+						'name' => 'receipt_show_seller_phone_number',
+						'value' => 'receipt_show_seller_phone_number',
+						'id' => 'receipt_show_seller_phone_number',
+						'checked'=>$this->config->item('receipt_show_seller_phone_number'))); ?>
+				</div>
+			</div>
+
+			<!-- new config ends here -->
 
 			<div class="form-group form-group-sm">	
 				<?php echo form_label($this->lang->line('config_receipt_show_serialnumber'), 'receipt_show_serialnumber', array('class' => 'control-label col-xs-2')); ?>
@@ -103,7 +150,7 @@
 			<div class="form-group form-group-sm">	
 				<?php echo form_label($this->lang->line('config_invoice_printer'), 'config_invoice_printer', array('class' => 'control-label col-xs-2')); ?>
 				<div class='col-xs-2'>
-					<?php echo form_dropdown('invoice_printer', array(), ' ', 'id="invoice_printer" class="form-control"'); ?>
+					<?php echo form_dropdown('invoice_printer', array('58 mm'), ' ', 'id="invoice_printer" class="form-control"'); ?>
 				</div>
 			</div>
 

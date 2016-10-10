@@ -7,11 +7,24 @@ class Home extends Secure_Controller
 	public function __construct()
 	{
 		parent::__construct();	
+
+    	$batch_save_data = array (
+			'receipt_show_taxes' => $this->Appconfig->get('receipt_show_taxes'),
+			'receipt_show_total_discount' => $this->Appconfig->get('receipt_show_total_discount'),
+			'receipt_show_date' => $this->Appconfig->get('receipt_show_date'),
+			'receipt_show_employee_name' => $this->Appconfig->get('receipt_show_employee_name'),
+			'receipt_show_seller_address' => $this->Appconfig->get('receipt_show_seller_address'),
+			'receipt_show_seller_phone_number' => $this->Appconfig->get('receipt_show_seller_phone_number'),
+			'receipt_show_serialnumber' => $this->Appconfig->get('receipt_show_serialnumber')
+		);
+		$this->session->set_userdata($batch_save_data);
 	}
 
 	public function index()
 	{
+
 		$this->load->view('home');
+
 	}
 
 	public function logout()

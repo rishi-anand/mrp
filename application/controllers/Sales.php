@@ -388,7 +388,15 @@ class Sales extends Secure_Controller
 			$data['cur_giftcard_value'] = $this->sale_lib->get_giftcard_remainder();
 			$data['print_after_sale'] = $this->sale_lib->is_print_after_sale();
 			$data['email_receipt'] = $this->sale_lib->get_email_receipt();
-			
+
+			$data['receipt_show_taxes'] = $this->session->userdata('receipt_show_taxes');
+			$data['receipt_show_total_discount'] = $this->session->userdata('receipt_show_total_discount');
+			$data['receipt_show_date'] = $this->session->userdata('receipt_show_date');
+			$data['receipt_show_employee_name'] = $this->session->userdata('receipt_show_employee_name');
+			$data['receipt_show_seller_address'] = $this->session->userdata('receipt_show_seller_address');
+			$data['receipt_show_seller_phone_number'] = $this->session->userdata('receipt_show_seller_phone_number');
+			$data['receipt_show_serialnumber'] = $this->session->userdata('eceipt_show_serialnumber');
+
 			if($this->sale_lib->is_invoice_number_enabled())
 			{
 				?>

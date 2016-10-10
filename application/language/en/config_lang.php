@@ -180,3 +180,9 @@ $lang["config_number_locale_required"] = "Number Locale is a required field";
 $lang["config_number_locale_invalid"] = "The entered locale is invalid. Check the link in the tooltip to find a sensible value";
 $lang["config_number_locale_tooltip"] = "Find a suitable locale through this link";
 $lang["config_theme"] = "Theme";
+
+$lang["config_receipt_show_employee_name"] = "Show Employee Name";
+$lang["config_receipt_show_date"] = "Show Date";
+$lang["config_receipt_show_seller_phone_number"] = "Show Seller Phone Number";
+$lang["config_receipt_show_seller_address"] = "Show Seller Address";
+$lang["config_receipt_set_thank_you_message"] = "Set Thank You Message";
