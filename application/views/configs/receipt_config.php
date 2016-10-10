@@ -229,7 +229,7 @@
 				</div>
 			</div>
 
-			<div class="form-group form-group-sm">	
+			<div class="form-group-sm">	
 				<?php echo form_label($this->lang->line('config_receipt_set_thank_you_message'), 'receipt_set_thank_you_message', array('class' => 'control-label col-xs-2')); ?>
 				<div class="col-xs-4">
 					<div class="input-group">
@@ -238,6 +238,7 @@
 							'name' => 'receipt_set_thank_you_message',
 							'id' => 'receipt_set_thank_you_message',
 							'class' => 'form-control input-sm required',
+							'maxlength' => '56',
 							'value'=>$this->config->item('receipt_set_thank_you_message') == null ? $this->config->item('receipt_set_thank_you_message') : $this->config->item('receipt_set_thank_you_message'),
 							'placeholder'=>$this->lang->line('config_receipt_set_thank_you_message_placeholder')));?>
 					</div>
