@@ -24,9 +24,9 @@
 			var y = setTimeout(function(){
 			$.unblockUI();
 			clearTimeout(y);
-		},50);
+		},10);
 			clearTimeout(x);
-		},50);
+		},10);
 
 		
 	</script>

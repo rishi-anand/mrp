@@ -64,13 +64,13 @@ INSERT INTO `ospos_app_config` (`key`, `value`) VALUES
 ('lines_per_page', '25'),
 ('dateformat', 'm/d/Y'),
 ('timeformat', 'H:i:s'),
-('currency_symbol', '$'),
-('number_locale', 'en_US'),
+('currency_symbol', '₹'),
+('number_locale', 'en_IN'),
 ('thousands_separator', '1'),
 ('currency_decimals', '2'),
 ('tax_decimals', '2'),
 ('quantity_decimals', '0'),
-('country_codes', 'us'),
+('country_codes', 'in'),
 ('msg_msg', ''),
 ('msg_uid', ''),
 ('msg_src', ''),
@@ -321,8 +321,7 @@ INSERT INTO `ospos_modules` (`name_lang_key`, `desc_lang_key`, `sort`, `module_i
 ('module_receivings', 'module_receivings_desc', 60, 'receivings'),
 ('module_reports', 'module_reports_desc', 50, 'reports'),
 ('module_sales', 'module_sales_desc', 10, 'sales'),
-('module_suppliers', 'module_suppliers_desc', 40, 'suppliers'),
-('module_regions', 'module_regions_desc', 120, 'regions');
+('module_suppliers', 'module_suppliers_desc', 40, 'suppliers');
 
 -- --------------------------------------------------------
 
@@ -394,8 +393,7 @@ INSERT INTO `ospos_permissions` (`permission_id`, `module_id`) VALUES
 ('reports', 'reports'),
 ('sales', 'sales'),
 ('config', 'config'),
-('suppliers', 'suppliers'),
-('regions', 'regions');
+('suppliers', 'suppliers');
 
 INSERT INTO `ospos_permissions` (`permission_id`, `module_id`, `location_id`) VALUES
 ('items_stock', 'items', 1),
@@ -444,8 +442,7 @@ INSERT INTO `ospos_grants` (`permission_id`, `person_id`) VALUES
 ('items_stock', 1),
 ('sales_stock', 1),
 ('receivings_stock', 1),
-('suppliers', 1),
-('regions', 1);
+('suppliers', 1);
 
 --
 -- Table structure for table `ospos_receivings`
