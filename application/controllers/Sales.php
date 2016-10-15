@@ -389,6 +389,7 @@ class Sales extends Secure_Controller
 			$data['print_after_sale'] = $this->sale_lib->is_print_after_sale();
 			$data['email_receipt'] = $this->sale_lib->get_email_receipt();
 
+			$data['company'] = $this->session->userdata('company');
 			$data['receipt_show_taxes'] = $this->session->userdata('receipt_show_taxes');
 			$data['receipt_show_total_discount'] = $this->session->userdata('receipt_show_total_discount');
 			$data['receipt_show_date'] = $this->session->userdata('receipt_show_date');

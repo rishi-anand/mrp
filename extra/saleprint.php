@@ -25,7 +25,8 @@ $data = $_GET["data"];
 */
 
 $data = (array) json_decode($data);
-if($data["print_after_sale"] == true){
+//if( false ){
+if( $data["print_after_sale"] == true ){
 
     $printer -> selectPrintMode(Printer::MODE_DOUBLE_HEIGHT);
 

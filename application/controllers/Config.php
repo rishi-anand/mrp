@@ -158,6 +158,19 @@ class Config extends Secure_Controller
 			'website' => $this->input->post('website'),	
 			'return_policy' => $this->input->post('return_policy')
 		);
+
+		$session_save_data = array (
+			'company' => $this->input->post('company'),
+			'receipt_show_taxes' => $this->session->userdata('receipt_show_taxes'),
+			'receipt_show_total_discount' => $this->session->userdata('receipt_show_total_discount'),
+			'receipt_show_date' => $this->session->userdata('receipt_show_date'),
+			'receipt_show_employee_name' => $this->session->userdata('receipt_show_employee_name'),
+			'receipt_show_seller_address' => $this->session->userdata('receipt_show_seller_address'),
+			'receipt_show_seller_phone_number' => $this->session->userdata('receipt_show_seller_phone_number'),
+			'receipt_show_serialnumber' => $this->session->userdata('receipt_show_serialnumber'),
+			'receipt_set_thank_you_message' => $this->session->userdata('receipt_set_thank_you_message')
+		);
+		$this->session->set_userdata($session_save_data);
 		
 		if (!empty($upload_data['orig_name']))
 		{
@@ -383,10 +396,22 @@ class Config extends Secure_Controller
 			'print_right_margin' => $this->input->post('print_right_margin'),
 			'receipt_set_thank_you_message' => $this->input->post('receipt_set_thank_you_message')
 		);
+
+		$session_save_data = array (
+			'company' => $this->session->userdata('company'),
+			'receipt_show_taxes' => $this->input->post('receipt_show_taxes') != NULL,
+			'receipt_show_total_discount' => $this->input->post('receipt_show_total_discount') != NULL,
+			'receipt_show_date' => $this->input->post('receipt_show_date') != NULL,
+			'receipt_show_employee_name' => $this->input->post('receipt_show_employee_name') != NULL,
+			'receipt_show_seller_address' => $this->input->post('receipt_show_seller_address') != NULL,
+			'receipt_show_seller_phone_number' => $this->input->post('receipt_show_seller_phone_number') != NULL,
+			'receipt_show_serialnumber' => $this->input->post('receipt_show_serialnumber') != NULL,
+			'receipt_set_thank_you_message' => $this->input->post('receipt_set_thank_you_message')
+		);
 		
     	$result = $this->Appconfig->batch_save($batch_save_data);
     	$success = $result ? TRUE : FALSE;
-        $this->session->set_userdata($batch_save_data);
+        $this->session->set_userdata($session_save_data);
     	echo json_encode(array('success' => $success, 'message' => $this->lang->line('config_saved_' . ($success ? '' : 'un') . 'successfully')));
     }
 

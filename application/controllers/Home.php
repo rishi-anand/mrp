@@ -9,6 +9,7 @@ class Home extends Secure_Controller
 		parent::__construct();	
 
     	$batch_save_data = array (
+    		'company' => $this->Appconfig->get('company'),
 			'receipt_show_taxes' => $this->Appconfig->get('receipt_show_taxes'),
 			'receipt_show_total_discount' => $this->Appconfig->get('receipt_show_total_discount'),
 			'receipt_show_date' => $this->Appconfig->get('receipt_show_date'),
