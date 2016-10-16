@@ -17,22 +17,24 @@ $data ='{"cart":{"1":{"item_id":"2","item_location":"1","stock_name":"stock","li
       $data["receipt_show_taxes"] -- DONE
       $data["receipt_show_date"] -- DONE
       $data["receipt_show_employee_name"] -- DONE
-      $data["receipt_show_seller_address"]
-      $data["receipt_show_seller_phone_number"]
+      $data["receipt_show_seller_address"] -- DONE
+      $data["receipt_show_seller_phone_number"] -- DONE
       $data["receipt_show_serialnumber"] -- DONE
       $data["receipt_set_thank_you_message"] -- DONE
-*/
 
-     // $array =  explode("\n", "1164/E New Thipssandra Main Road,\r\nNew Delhi\n918888888888\n");
-     //echo "phone " . $array[sizeof($array)-2]; //only phone number
+
+     $printer -> text("IAMRISHIANANDANDWHOAREYOUTHISISC"."\n");
+
+     $array =  explode("\n", "1164/E New Thipssandra Main Road,\r\nNew Delhi\n918888888888\n");
+     echo "phone " . $array[sizeof($array)-2]; //only phone number
      
-     // for ($x=0; $x < sizeof($array)-2 ;$x++)   // only address
-     //   echo "n".$array[$x];
+     for ($x=0; $x < sizeof($array)-2 ;$x++)   // only address
+        echo "n".$array[$x];
 
-     // for ($x=0; $x < sizeof($array)-1 ;$x++)   // address and phone number
-     //   echo "n".$array[$x];
+     for ($x=0; $x < sizeof($array)-1 ;$x++)   // address and phone number
+        echo "n".$array[$x];
 
-
+*/
 function printCenter($text) {
     $length_text = strlen($text);
     
@@ -203,59 +205,98 @@ $data = (array) json_decode($data);
 if( $data["print_after_sale"] ){
 
     $printer -> selectPrintMode(Printer::MODE_DOUBLE_HEIGHT);
-
-    //$data["company_info"] = explode("\n", $data["company_info"], 2)[0];
+    
+    // ******** printing COMPANY NAME ********
     $length_company = strlen($data["company"]);
     $company_name = $data["company"];
-    if( $length_company < 3 && $length_company > 28 ){
-      $data["company_info"] = "MRP Solutions";
+    if( $length_company < 3 ){
+      $data["company"] = "MRP Solutions";
+    }
+
+    if( $length_company > 28 ){
+      $data["company"] = substr($data["company"], 0, 27);
     }
 
     printCenter($data["company"]);
+
+    if( $data["receipt_show_seller_address"] || $data["receipt_show_seller_phone_number"] ){
+     $address_phone_arr =  explode("\n", $data["company_info"]);
+
+      // ******** printing COMPANY ADDRESS ONLY ********
+      if( $data["receipt_show_seller_address"] && !$data["receipt_show_seller_phone_number"] ){
+         for ($x=0; $x < sizeof($address_phone_arr)-2 ;$x++){
+            printCenter($address_phone_arr[$x]);
+          }
+      }
+
+      // ******** printing COMPANY PHONE NUMBER ONLY ********
+      if( !$data["receipt_show_seller_address"] && $data["receipt_show_seller_phone_number"] ){
+            printCenter($address_phone_arr[sizeof($address_phone_arr)-2]);
+      }
+
+      // ******** printing COMPANY ADDRESS AND PHONE NUMBER ONLY ********
+      if( $data["receipt_show_seller_address"] && $data["receipt_show_seller_phone_number"] ){
+         for ($x=0; $x < sizeof($address_phone_arr)-1 ;$x++){
+            printCenter($address_phone_arr[$x]);
+          }
+      }
+
+    }
     $printer -> feed(1);
     $printer -> selectPrintMode(Printer::MODE_FONT_A);
 
     if ( $data["receipt_show_date"] || $data["receipt_show_serialnumber"] || $data["receipt_show_employee_name"] ){
       $printer -> text("--------------------------------"."\n");
+
+      // ******** printing DATE ONLY ********
       if ( $data["receipt_show_date"] && !$data["receipt_show_serialnumber"] ){
         printCenter("Date : ".getDateToday());
       }
 
+      // ******** printing RECEIPT SERIAL NUMBER ONLY ********
       if ( !$data["receipt_show_date"] && $data["receipt_show_serialnumber"] ){
         printCenter("Serial No : ".$data["sale_id_num"]);
       }
 
+      // ******** printing DATE AND RECEIPT SERIAL NUMBER ********
       if ( $data["receipt_show_date"] && $data["receipt_show_serialnumber"] ){
         printCenter(getDateToday()."  Sr No: ".$data["sale_id_num"]);
       }
 
+      // ******** printing EMPLOYEE/STAFF NAME ********
       if( $data["receipt_show_employee_name"] ){
         printCenter("Staff : ".$data["employee"]);
       }
     }
 
-    //$printer -> text("IAMRISHIANANDANDWHOAREYOUTHISISC"."\n");
+
     $printer -> text("--------------------------------"."\n");
     $printer -> text("NAME/             QTY    PRICE"."\n");
     $printer -> text("PRICE-UNIT"."\n");
     $printer -> text("--------------------------------"."\n");
     $printer -> selectPrintMode(Printer::MODE_FONT_A);
 
+    // ******** printing ITEMS/PRICE-UNIT, QUANTITY AND PRICE ********
     printItems();
 
+    // ******** printing TAXES ********
     if( $data["receipt_show_taxes"] && count($data["taxes"]) ){
       printTaxes();
     }
 
+    // ******** printing TOTAL ********
     $data["total"] = number_format($data["total"], 2, '.', '');
     $printer -> text("--------------------------------"."\n");
     $printer -> text("         TOTAL        : ".$data["total"]."\n");
     $printer -> text("--------------------------------"."\n");
+
     if(strlen($data["receipt_set_thank_you_message"]) > 2){
       $printer -> feed(1);
       if( strlen($data["receipt_set_thank_you_message"]) > 55 ){
         $data["receipt_set_thank_you_message"] = substr($data["receipt_set_thank_you_message"], 0, 53);
       }
+
+      // ******** printing THANK YOU MESSAGE ********
       printCenter($data["receipt_set_thank_you_message"]);
     }
     foreach($data["taxes"] as $key => $value) {
