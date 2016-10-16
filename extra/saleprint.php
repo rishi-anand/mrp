@@ -8,9 +8,9 @@ use Mike42\Escpos\Printer;
 $connector = new FilePrintConnector("/dev/usb/lp0");
 $printer = new Printer($connector);
 
-$data = $_GET["data"];
+//$data = $_GET["data"];
 
-$data ='{"cart":{"1":{"item_id":"2","item_location":"1","stock_name":"stock","line":"1","name":"Apple Earphone and playbookis","item_number":"345677","description":"Best earphone ever","serialnumber":"","allow_alt_description":"1","is_serialized":"0","quantity":"3","discount":"0","in_stock":"99.000","price":"200.50","total":"600","discounted_total":"600.5000"},"2":{"item_id":"1","item_location":"1","stock_name":"stock","line":"2","name":"Apple iMac","item_number":"33333333","description":"Best Computer ever","serialnumber":"","allow_alt_description":"1","is_serialized":"0","quantity":"2","discount":"0","in_stock":"97.000","price":"1200","total":"2400","discounted_total":"2400.0000"},"3":{"item_id":"3","item_location":"1","stock_name":"stock","line":"3","name":"classic mild","item_number":"99998777","description":"","serialnumber":"","allow_alt_description":"0","is_serialized":"0","quantity":"1","discount":"0","in_stock":"0.000","price":"13.00","total":"13.00","discounted_total":"13.0000"}},"subtotal":"3013.0000","discounted_subtotal":"3013.0000","tax_exclusive_subtotal":"3013.0000","taxes":{"8.00% Tax 1":"240.0000","10.00% Tax 2":"300.0000"},"total":"3553.0000","discount":"0","receipt_title":"Sales Receipt","transaction_time":"09/25/2016 17:51:06","transaction_date":"09/25/2016","show_stock_locations":"","comments":"","payments":{"Cash":{"payment_type":"Cash","payment_amount":"3553"}},"amount_change":"0","amount_due":"0","employee":"Ravi Kumar","company_info":"MRP\n918888888888\n","customer":"","first_name":"Bob","last_name":"Smith","customer_email":"bsmith@nowhere.com","customer_address":"MRP Solutions","customer_location":"11111 Awesome","customer_account_number":"","customer_discount_percent":"5.00","customer_info":"\n123 Nowhere Street\n11111 Awesome\n","invoice_number":"1","sale_id_num":"2","sale_id":"POS 2","barcode":"iVBORw0KGgoAAAANSUhEUgAAAMgAAAAeAQMAAABT8cPvAAAABlBMVEX///8AAABVwtN AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAK0lEQVQokWNgsDlg8OfPZ bP5 0NbD58 PDH LABP/NnOwaGUZlRmRElAwBR3X4YATNysAAAAABJRU5ErkJggg==","cur_giftcard_value":null,"print_after_sale":true,"email_receipt":"1"}';
+$data ='{"cart":{"1":{"item_id":"1","item_location":"1","stock_name":"stock","line":"1","name":"apple","item_number":"9988878","description":"","serialnumber":"","allow_alt_description":"0","is_serialized":"0","quantity":"1","discount":"0","in_stock":"-6.000","price":"1200.00","total":"1200.00","discounted_total":"1200.0000"}},"subtotal":"1200.0000","discounted_subtotal":"1200.0000","tax_exclusive_subtotal":"1200.0000","taxes":{"5.00% Tax1":"60.0000","8.00% Tax2":"96.0000"},"total":"1356.0000","discount":"0","receipt_title":"Sales Receipt","transaction_time":"10/16/2016 14:04:59","transaction_date":"10/16/2016","show_stock_locations":"","comments":"","payments":{"Cash":{"payment_type":"Cash","payment_amount":"1356"}},"amount_change":"0","amount_due":"0","employee":"Ravi Kumar","company_info":"1164/E New Thipssandra Main Road,\r\nNew Delhi\n918888888888\n","invoice_number":"","sale_id_num":"7","sale_id":"POS 7","barcode":"iVBORw0KGgoAAAANSUhEUgAAAMgAAAAeAQMAAABT8cPvAAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAK0lEQVQokWNgsDlg8OfPZ+bP5+0NbD58+PP582f788yf7RgYRmVGZUaUDABaWLLUBjxkHwAAAABJRU5ErkJggg==","cur_giftcard_value":null,"print_after_sale":true,"email_receipt":null,"company":"MRP","receipt_show_taxes":"1","receipt_show_total_discount":"1","receipt_show_date":"1","receipt_show_employee_name":"1","receipt_show_seller_address":"1","receipt_show_seller_phone_number":"1","receipt_show_serialnumber":"1","receipt_set_thank_you_message":"* Thank You.Please Visit Again *"}';
 
 /*
       $data["company"] -- DONE
@@ -34,8 +34,14 @@ $data ='{"cart":{"1":{"item_id":"2","item_location":"1","stock_name":"stock","li
      for ($x=0; $x < sizeof($array)-1 ;$x++)   // address and phone number
         echo "n".$array[$x];
 
+      $add = preg_replace('/\W/', " ", $address_phone_arr[$x]);
+      $add = rtrim($add);
+
 */
-function printCenter($text) {
+
+
+/*
+function printC($text,$printer) {
     $length_text = strlen($text);
     
     if( $length_text <= 4 && $length_text >= 3 ){
@@ -71,16 +77,27 @@ function printCenter($text) {
     if( $length_text <= 26 && $length_text > 24 ){
       $printer -> text("   ".$text."\n");
     }
-    if( $length_text > 26 ){
-      $printer -> text("  ".$text."\n");
+    if( $length_text <= 28 && $length_text > 26 ){
+      $printer -> text(" ".$text."\n");
+    }
+    if( $length_text > 28 ){
+      $printer -> text($text."\n");
     }
 
 }
+*/
 
-function printItems() {
+
+function printCenter($text,$printer) {
+  $printer -> setJustification(Printer::JUSTIFY_CENTER);
+  $printer -> text($text."\n");
+  $printer -> setJustification();
+}
+
+function printItems($printer) {
+  global $data;
   foreach ($data["cart"] as $value) {
       $value = (array) $value;
-      echo $value["name"] ." / ". $value["price"] . $value["total"];
       if(strlen($value["name"]) > 25){
         $value["name"] = substr($value["name"], 0, 24);
       }
@@ -96,50 +113,51 @@ function printItems() {
         $length_line1 = strlen($line1);
 
           if( $length_line1 <= 10 && $length_line1 > 7 ){
-            $printer -> text($line1."          ".$value["quantity"]."    ".$value["total"]."\n");
+            $printer -> text($line1."          ".$value["quantity"]."   ".$value["total"]."\n");
             $printer -> text($line2."\n");
           }
           if( $length_line1 <= 12 && $length_line1 > 10 ){
-            $printer -> text($line1."        ".$value["quantity"]."    ".$value["total"]."\n");
+            $printer -> text($line1."        ".$value["quantity"]."   ".$value["total"]."\n");
             $printer -> text($line2."\n");
           }
           if( $length_line1 <= 14 && $length_line1 > 12 ){
-            $printer -> text($line1."      ".$value["quantity"]."    ".$value["total"]."\n");
+            $printer -> text($line1."      ".$value["quantity"]."   ".$value["total"]."\n");
             $printer -> text($line2."\n");
           }
           if( $length_line1 < 16 && $length_line1 > 14 ){
-            $printer -> text($line1."    ".$value["quantity"]."    ".$value["total"]."\n");
+            $printer -> text($line1."    ".$value["quantity"]."   ".$value["total"]."\n");
             $printer -> text($line2."\n");
           }
           if( $length_line1 >= 16 ){ 
-            $printer -> text($line1."   ".$value["quantity"]."    ".$value["total"]."\n");
+            $printer -> text($line1."   ".$value["quantity"]."   ".$value["total"]."\n");
             $printer -> text($line2."\n");
           }
       }else{
           if( $length_sentence <= 7 ){
-            $printer -> text($sentence."             ".$value["quantity"]."    ".$value["total"]."\n");
+            $printer -> text($sentence."             ".$value["quantity"]."   ".$value["total"]."\n");
           }
           if( $length_sentence <= 10 && $length_sentence > 7 ){
-            $printer -> text($sentence."          ".$value["quantity"]."    ".$value["total"]."\n");
+            $printer -> text($sentence."          ".$value["quantity"]."   ".$value["total"]."\n");
           }
           if( $length_sentence <= 12 && $length_sentence > 10 ){
-            $printer -> text($sentence."        ".$value["quantity"]."    ".$value["total"]."\n");
+            $printer -> text($sentence."        ".$value["quantity"]."   ".$value["total"]."\n");
           }
           if( $length_sentence <= 14 && $length_sentence > 12 ){
-            $printer -> text($sentence."      ".$value["quantity"]."    ".$value["total"]."\n");
+            $printer -> text($sentence."      ".$value["quantity"]."   ".$value["total"]."\n");
           }
           if( $length_sentence < 16 && $length_sentence > 14 ){
-            $printer -> text($sentence."    ".$value["quantity"]."    ".$value["total"]."\n");
+            $printer -> text($sentence."    ".$value["quantity"]."   ".$value["total"]."\n");
           }
           if( $length_sentence >= 16 ){
-            $printer -> text($sentence."   ".$value["quantity"]."    ".$value["total"]."\n");
+            $printer -> text($sentence."   ".$value["quantity"]."   ".$value["total"]."\n");
           }
       }
   }
 }
 
-function printTaxes() {
-
+function printTaxes($printer) {
+  global $data;
+  $printer -> setFont(Printer::FONT_C);
   foreach($data["taxes"] as $key => $value) {
 
     $value = number_format($value, 2, '.', '');
@@ -192,6 +210,8 @@ function printTaxes() {
       $printer -> text($key."       ".$value."\n");
     }
   }
+
+  $printer -> setFont();
 }
 
 function getDateToday() {
@@ -202,7 +222,7 @@ function getDateToday() {
 
 $data = (array) json_decode($data);
 //if( false ){
-if( $data["print_after_sale"] ){
+if( $data["print_after_sale"] == true){
 
     $printer -> selectPrintMode(Printer::MODE_DOUBLE_HEIGHT);
     
@@ -217,55 +237,67 @@ if( $data["print_after_sale"] ){
       $data["company"] = substr($data["company"], 0, 27);
     }
 
-    printCenter($data["company"]);
+    printCenter($data["company"],$printer);
 
+    $printer -> selectPrintMode(Printer::MODE_FONT_A);
     if( $data["receipt_show_seller_address"] || $data["receipt_show_seller_phone_number"] ){
      $address_phone_arr =  explode("\n", $data["company_info"]);
 
       // ******** printing COMPANY ADDRESS ONLY ********
       if( $data["receipt_show_seller_address"] && !$data["receipt_show_seller_phone_number"] ){
          for ($x=0; $x < sizeof($address_phone_arr)-2 ;$x++){
-            printCenter($address_phone_arr[$x]);
+
+            $add = preg_replace('/\W/', " ", $address_phone_arr[$x]);
+            $add = rtrim($add);
+            printCenter($add,$printer);
           }
       }
 
       // ******** printing COMPANY PHONE NUMBER ONLY ********
       if( !$data["receipt_show_seller_address"] && $data["receipt_show_seller_phone_number"] ){
-            printCenter($address_phone_arr[sizeof($address_phone_arr)-2]);
+            printCenter($address_phone_arr[sizeof($address_phone_arr)-2],$printer);
       }
 
       // ******** printing COMPANY ADDRESS AND PHONE NUMBER ONLY ********
       if( $data["receipt_show_seller_address"] && $data["receipt_show_seller_phone_number"] ){
          for ($x=0; $x < sizeof($address_phone_arr)-1 ;$x++){
-            printCenter($address_phone_arr[$x]);
+
+            $add = preg_replace('/\W/', " ", $address_phone_arr[$x]);
+            $add = rtrim($add);
+            printCenter($add,$printer);
           }
       }
 
     }
-    $printer -> feed(1);
-    $printer -> selectPrintMode(Printer::MODE_FONT_A);
 
     if ( $data["receipt_show_date"] || $data["receipt_show_serialnumber"] || $data["receipt_show_employee_name"] ){
       $printer -> text("--------------------------------"."\n");
+      $printEmployee = 1;
 
       // ******** printing DATE ONLY ********
       if ( $data["receipt_show_date"] && !$data["receipt_show_serialnumber"] ){
-        printCenter("Date : ".getDateToday());
+        printCenter("Date : ".getDateToday(),$printer);
       }
 
       // ******** printing RECEIPT SERIAL NUMBER ONLY ********
-      if ( !$data["receipt_show_date"] && $data["receipt_show_serialnumber"] ){
-        printCenter("Serial No : ".$data["sale_id_num"]);
+      if ( !$data["receipt_show_date"] && $data["receipt_show_serialnumber"] && !$data["receipt_show_employee_name"] ){
+        printCenter("Serial No : ".$data["sale_id_num"],$printer);
+      }
+      
+      // ******** printing EMPLOYEE/STAFF AND RECEIPT SERIAL NUMBER ONLY ********
+      if ( !$data["receipt_show_date"] && $data["receipt_show_serialnumber"] && $data["receipt_show_employee_name"] ){
+        printCenter("Staff:".$data["employee"]."    "."Sr No:".$data["sale_id_num"],$printer);
+        $printEmployee = 0;
       }
 
       // ******** printing DATE AND RECEIPT SERIAL NUMBER ********
       if ( $data["receipt_show_date"] && $data["receipt_show_serialnumber"] ){
-        printCenter(getDateToday()."  Sr No: ".$data["sale_id_num"]);
+        printCenter(getDateToday()."    Sr No: ".$data["sale_id_num"],$printer);
       }
 
       // ******** printing EMPLOYEE/STAFF NAME ********
-      if( $data["receipt_show_employee_name"] ){
-        printCenter("Staff : ".$data["employee"]);
+      if( $data["receipt_show_employee_name"] && $printEmployee ){
+        printCenter("Staff : ".$data["employee"],$printer);
       }
     }
 
@@ -277,11 +309,11 @@ if( $data["print_after_sale"] ){
     $printer -> selectPrintMode(Printer::MODE_FONT_A);
 
     // ******** printing ITEMS/PRICE-UNIT, QUANTITY AND PRICE ********
-    printItems();
+    printItems($printer);
 
     // ******** printing TAXES ********
     if( $data["receipt_show_taxes"] && count($data["taxes"]) ){
-      printTaxes();
+      printTaxes($printer);
     }
 
     // ******** printing TOTAL ********
@@ -297,11 +329,7 @@ if( $data["print_after_sale"] ){
       }
 
       // ******** printing THANK YOU MESSAGE ********
-      printCenter($data["receipt_set_thank_you_message"]);
-    }
-    foreach($data["taxes"] as $key => $value) {
-    echo($key);
-    echo($value);
+      printCenter($data["receipt_set_thank_you_message"],$printer);
     }
     $printer -> feed(2);
 
