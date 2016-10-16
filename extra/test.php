@@ -1,36 +1,20 @@
 <?php
 
 
-require __DIR__ . '/../escpos_php/autoload.php';
-use Mike42\Escpos\PrintConnectors\FilePrintConnector;
-use Mike42\Escpos\Printer;
+//$data = $_GET["data"];
 
-$connector = new FilePrintConnector("/dev/usb/lp0");
-$printer = new Printer($connector);
-
-$data = $_GET["data"];
-
-$data ='{"cart":{"1":{"item_id":"2","item_location":"1","stock_name":"stock","line":"1","name":"Apple Earphone and playbookis","item_number":"345677","description":"Best earphone ever","serialnumber":"","allow_alt_description":"1","is_serialized":"0","quantity":"3","discount":"0","in_stock":"99.000","price":"200.50","total":"600","discounted_total":"600.5000"},"2":{"item_id":"1","item_location":"1","stock_name":"stock","line":"2","name":"Apple iMac","item_number":"33333333","description":"Best Computer ever","serialnumber":"","allow_alt_description":"1","is_serialized":"0","quantity":"2","discount":"0","in_stock":"97.000","price":"1200","total":"2400","discounted_total":"2400.0000"},"3":{"item_id":"3","item_location":"1","stock_name":"stock","line":"3","name":"classic mild","item_number":"99998777","description":"","serialnumber":"","allow_alt_description":"0","is_serialized":"0","quantity":"1","discount":"0","in_stock":"0.000","price":"13.00","total":"13.00","discounted_total":"13.0000"}},"subtotal":"3013.0000","discounted_subtotal":"3013.0000","tax_exclusive_subtotal":"3013.0000","taxes":{"8.00% Tax 1":"240.0000","10.00% Tax 2":"300.0000"},"total":"3553.0000","discount":"0","receipt_title":"Sales Receipt","transaction_time":"09/25/2016 17:51:06","transaction_date":"09/25/2016","show_stock_locations":"","comments":"","payments":{"Cash":{"payment_type":"Cash","payment_amount":"3553"}},"amount_change":"0","amount_due":"0","employee":"Ravi Kumar","company_info":"MRP\n918888888888\n","customer":"","first_name":"Bob","last_name":"Smith","customer_email":"bsmith@nowhere.com","customer_address":"MRP Solutions","customer_location":"11111 Awesome","customer_account_number":"","customer_discount_percent":"5.00","customer_info":"\n123 Nowhere Street\n11111 Awesome\n","invoice_number":"1","sale_id_num":"2","sale_id":"POS 2","barcode":"iVBORw0KGgoAAAANSUhEUgAAAMgAAAAeAQMAAABT8cPvAAAABlBMVEX///8AAABVwtN AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAK0lEQVQokWNgsDlg8OfPZ bP5 0NbD58 PDH LABP/NnOwaGUZlRmRElAwBR3X4YATNysAAAAABJRU5ErkJggg==","cur_giftcard_value":null,"print_after_sale":true,"email_receipt":"1"}';
+$data ='{"cart":{"1":{"item_id":"1","item_location":"1","stock_name":"stock","line":"1","name":"apple","item_number":"9988878","description":"","serialnumber":"","allow_alt_description":"0","is_serialized":"0","quantity":"1","discount":"0","in_stock":"-4.000","price":"1200.00","total":"1200.00","discounted_total":"1200.0000"},"2":{"item_id":"2","item_location":"1","stock_name":"stock","line":"2","name":"apple earphone","item_number":"887655","description":"","serialnumber":"","allow_alt_description":"0","is_serialized":"0","quantity":"1","discount":"0","in_stock":"-2.000","price":"1300.00","total":"1300.00","discounted_total":"1300.0000"}},"subtotal":"2500.0000","discounted_subtotal":"2500.0000","tax_exclusive_subtotal":"2500.0000","taxes":{"5.00% Tax1":"60.0000","8.00% Tax2":"96.0000"},"total":"2656.0000","discount":"0","receipt_title":"Sales Receipt","transaction_time":"10/15/2016 14:46:11","transaction_date":"10/15/2016","show_stock_locations":"","comments":"","payments":{"Cash":{"payment_type":"Cash","payment_amount":"2656"}},"amount_change":"0","amount_due":"0","employee":"Ravi Kumar","company_info":"1164/E New Thipssandra Main Road,\r\nNew Delhi\n918888888888\n","invoice_number":"","sale_id_num":"5","sale_id":"POS 5","barcode":"iVBORw0KGgoAAAANSUhEUgAAAMgAAAAeAQMAAABT8cPvAAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAK0lEQVQokWNgsDlg8OfPZ+bP5+0NbD58+Pzh8J/P55k/2zEwjMqMyowoGQDqDMHyOVScSQAAAABJRU5ErkJggg==","cur_giftcard_value":null,"print_after_sale":true,"email_receipt":null,"company":null,"receipt_show_taxes":"0","receipt_show_total_discount":"1","receipt_show_date":"0","receipt_show_employee_name":"0","receipt_show_seller_address":"0","receipt_show_seller_phone_number":"0","receipt_show_serialnumber":"1","receipt_set_thank_you_message":"* Thank You.Please Visit Again *"}';
 
 /*
-      $data["company"] -- DONE
-      $data["receipt_show_taxes"] -- DONE
-      $data["receipt_show_date"] -- DONE
-      $data["receipt_show_employee_name"] -- DONE
+      $data["company"]
+      $data["receipt_show_taxes"]
+      $data["receipt_show_total_discount"]
+      $data["receipt_show_date"]
+      $data["receipt_show_employee_name"]
       $data["receipt_show_seller_address"]
       $data["receipt_show_seller_phone_number"]
-      $data["receipt_show_serialnumber"] -- DONE
-      $data["receipt_set_thank_you_message"] -- DONE
-*/
-
-     // $array =  explode("\n", "1164/E New Thipssandra Main Road,\r\nNew Delhi\n918888888888\n");
-     //echo "phone " . $array[sizeof($array)-2]; //only phone number
-     
-     // for ($x=0; $x < sizeof($array)-2 ;$x++)   // only address
-     //   echo "n".$array[$x];
-
-     // for ($x=0; $x < sizeof($array)-1 ;$x++)   // address and phone number
-     //   echo "n".$array[$x];
+      $data["receipt_show_serialnumber"]
+      $data["receipt_set_thank_you_message"]
 
 
 function printCenter($text) {
@@ -79,7 +63,7 @@ function printItems() {
   foreach ($data["cart"] as $value) {
       $value = (array) $value;
       echo $value["name"] ." / ". $value["price"] . $value["total"];
-      if(strlen($value["name"]) > 25){
+      while(strlen($value["name"]) > 25){
         $value["name"] = substr($value["name"], 0, 24);
       }
 
@@ -136,70 +120,15 @@ function printItems() {
   }
 }
 
-function printTaxes() {
-
-  foreach($data["taxes"] as $key => $value) {
-
-    $value = number_format($value, 2, '.', '');
-    $length_key = strlen($key);
-
-    if( $length_key > 16 ){
-      $key = substr($key, 0, 15);
-    }
-
-    if( $length_key == 3 ){
-      $printer -> text($key."                    ".$value."\n");
-    }
-    if( $length_key == 4 ){
-      $printer -> text($key."                   ".$value."\n");
-    }
-    if( $length_key == 5 ){
-      $printer -> text($key."                  ".$value."\n");
-    }
-    if( $length_key == 6 ){
-      $printer -> text($key."                 ".$value."\n");
-    }
-    if( $length_key == 7 ){
-      $printer -> text($key."                ".$value."\n");
-    }
-    if( $length_key == 8 ){
-      $printer -> text($key."               ".$value."\n");
-    }
-    if( $length_key == 9 ){
-      $printer -> text($key."              ".$value."\n");
-    }
-    if( $length_key == 10 ){
-      $printer -> text($key."             ".$value."\n");
-    }
-    if( $length_key == 11 ){
-      $printer -> text($key."            ".$value."\n");
-    }
-    if( $length_key == 12 ){
-      $printer -> text($key."           ".$value."\n");
-    }
-    if( $length_key == 13 ){
-      $printer -> text($key."          ".$value."\n");
-    }
-    if( $length_key == 14 ){
-      $printer -> text($key."         ".$value."\n");
-    }
-    if( $length_key == 15 ){
-      $printer -> text($key."        ".$value."\n");
-    }
-    if( $length_key == 16 ){
-      $printer -> text($key."       ".$value."\n");
-    }
-  }
-}
-
 function getDateToday() {
   $date = date_default_timezone_set('Asia/Kolkata');
   $date_today = date("d/m/Y H:i", time());
   return $date_today;
 }
-
+*/
 $data = (array) json_decode($data);
 //if( false ){
+/*
 if( $data["print_after_sale"] ){
 
     $printer -> selectPrintMode(Printer::MODE_DOUBLE_HEIGHT);
@@ -243,30 +172,37 @@ if( $data["print_after_sale"] ){
 
     printItems();
 
-    if( $data["receipt_show_taxes"] && count($data["taxes"]) ){
-      printTaxes();
-    }
-
     $data["total"] = number_format($data["total"], 2, '.', '');
     $printer -> text("--------------------------------"."\n");
     $printer -> text("         TOTAL        : ".$data["total"]."\n");
     $printer -> text("--------------------------------"."\n");
     if(strlen($data["receipt_set_thank_you_message"]) > 2){
       $printer -> feed(1);
-      if( strlen($data["receipt_set_thank_you_message"]) > 55 ){
-        $data["receipt_set_thank_you_message"] = substr($data["receipt_set_thank_you_message"], 0, 53);
-      }
       printCenter($data["receipt_set_thank_you_message"]);
     }
+
+   
+    
+    echo count($data["taxes"]);
+
+    
     foreach($data["taxes"] as $key => $value) {
-    echo($key);
-    echo($value);
+    echo("Key : ".$key." , Value : ");
+    echo($value." ; ");
     }
+ */
+    if(!0){
+      echo "india";
+    }
+    /*
     $printer -> feed(2);
 
     $printer -> cut();
     $printer -> close();
+
 }
+
+    */
 
 
 
