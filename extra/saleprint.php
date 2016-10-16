@@ -104,6 +104,7 @@ function printItems($printer) {
 
       $value["price"] = number_format($value["price"], 2, '.', '');
       $value["total"] = number_format($value["total"], 2, '.', '');
+      $value["quantity"] = number_format($value["quantity"], 0, '.', '');
       $sentence = $value["name"] ."/". $value["price"];
       $length_sentence = strlen($sentence);
 
