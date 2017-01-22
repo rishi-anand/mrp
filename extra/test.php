@@ -1,6 +1,6 @@
 <?php
 
-
+console.log("hi");
 require __DIR__ . '/../escpos_php/autoload.php';
 use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 use Mike42\Escpos\Printer;

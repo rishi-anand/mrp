@@ -399,13 +399,16 @@ class Sales extends Secure_Controller
 			$data['receipt_show_serialnumber'] = $this->session->userdata('receipt_show_serialnumber');
 			$data['receipt_set_thank_you_message'] = $this->session->userdata('receipt_set_thank_you_message');
 
+
 			if($this->sale_lib->is_invoice_number_enabled())
 			{
 				?>
 				<script>
 				var sale_data = <?php echo json_encode($data, JSON_HEX_TAG); ?>;
 				sale_data = JSON.stringify(sale_data);
-				var url = "http://192.168.0.253/rishi/mrp/extra/saleprint.php?data="+sale_data;
+				var ip = location.host;
+				var url = "http://"+ip+"/extra/saleprint.php?data="+sale_data;
+				//var url = "http://192.168.1.253/extra/saleprint.php?data="+sale_data;
 				console.log(url);
 				var xmlhttp = new XMLHttpRequest();
 				xmlhttp.onreadystatechange = function() {
@@ -427,7 +430,8 @@ class Sales extends Secure_Controller
 				<script>
 				var sale_data = <?php echo json_encode($data, JSON_HEX_TAG); ?>;
 				sale_data = JSON.stringify(sale_data);
-				var url = "http://192.168.0.253/rishi/mrp/extra/saleprint.php?data="+sale_data;
+				var ip = location.host;
+				var url = "http://"+ip+"/extra/saleprint.php?data="+sale_data;
 				console.log(url);
 				var xmlhttp = new XMLHttpRequest();
 				xmlhttp.onreadystatechange = function() {

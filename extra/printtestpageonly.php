@@ -1,12 +1,5 @@
 <?php
 
-try {
-  exec('sudo chmod -R 777 /var/www/html/*');
-  exec('sudo chmod -R 777 /var/www/html/');
-  exec('sudo chmod 777 /dev/usb/lp0');
-}catch (Exception $e){
-
-}
 
 require __DIR__ . '/../escpos_php/autoload.php';
 use Mike42\Escpos\PrintConnectors\FilePrintConnector;
@@ -15,114 +8,12 @@ use Mike42\Escpos\Printer;
 $connector = new FilePrintConnector("/dev/usb/lp0");
 $printer = new Printer($connector);
 
-$data = $_GET["data"];
-//echo $data;
+//$data = $_GET["data"];
 
+/*$data ='{"cart":{"1":{"item_id":"1","item_location":"1","stock_name":"stock","line":"1","name":"apple","item_number":"9988878","description":"","serialnumber":"","allow_alt_description":"0","is_serialized":"0","quantity":"1","discount":"0","in_stock":"-6.000","price":"1200.00","total":"1200.00","discounted_total":"1200.0000"}},"subtotal":"1200.0000","discounted_subtotal":"1200.0000","tax_exclusive_subtotal":"1200.0000","taxes":{"5.00% Tax1":"60.0000","8.00% Tax2":"96.0000"},"total":"1356.0000","discount":"0","receipt_title":"Sales Receipt","transaction_time":"10/16/2016 14:04:59","transaction_date":"10/16/2016","show_stock_locations":"","comments":"","payments":{"Cash":{"payment_type":"Cash","payment_amount":"1356"}},"amount_change":"0","amount_due":"0","employee":"Ravi Kumar","company_info":"1164/E New Thipssandra Main Road,\r\nNew Delhi\n918888888888\n","invoice_number":"","sale_id_num":"7","sale_id":"POS 7","barcode":"iVBORw0KGgoAAAANSUhEUgAAAMgAAAAeAQMAAABT8cPvAAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAK0lEQVQokWNgsDlg8OfPZ+bP5+0NbD58+PP582f788yf7RgYRmVGZUaUDABaWLLUBjxkHwAAAABJRU5ErkJggg==","cur_giftcard_value":null,"print_after_sale":true,"email_receipt":null,"company":"MRP","receipt_show_taxes":"1","receipt_show_total_discount":"1","receipt_show_date":"1","receipt_show_employee_name":"1","receipt_show_seller_address":"1","receipt_show_seller_phone_number":"1","receipt_show_serialnumber":"1","receipt_set_thank_you_message":"* Thank You.Please Visit Again *"}';
 
- //Create database
-//echo "hello";
-
-class DatabaseOperation{
-    var $isConnectionCreated = true;
-    var $conn = "";
-    function createConnection(){
-      $servername = "localhost";
-      $username = "root";
-      $password = "9934";
-      $dbname = "myDB";
-
-      // Create connection
-      $con = new mysqli($servername, $username, $password, $dbname);
-      // Check connection
-      if ($con->connect_error) {
-          //$isConnectionCreated = false;
-          $this->conn = $con;
-          $this->isConnectionCreated = false;
-          return "false";
-          //die("Connection failed: " . $this->$conn->connect_error);
-      }else{
-        return "true";
-      }
-    }
-    function insertIntoTable($id,$string){
-      if(!$id)
-        return 0;
-      $id = (string) $id;
-      $id = "'".$id."'";
-      $string = (string) $string;
-      $string = "'".$string."'";
-      $servername = "localhost";
-      $username = "root";
-      $password = "9934";
-      $dbname = "myDB";
-
-      // Create connection
-      $con = new mysqli($servername, $username, $password, $dbname);
-      // Check connection
-      if ($con->connect_error) {
-          //$isConnectionCreated = false;
-          $this->conn = $con;
-          $this->isConnectionCreated = false;
-          return "false";
-          //die("Connection failed: " . $this->$conn->connect_error);
-      }
-      $sql = "INSERT INTO Sale_Print (sale_no, sale_data)
-            VALUES ($id, $string)";
-      if ($con->query($sql) === TRUE) {
-          //echo "New record created successfully";
-          return 1;
-      } else {
-          //echo "Error: " . $sql . "<br>" . $con->error;
-          return 0;
-      }
-    }
-    function getStringFromTable($id){
-      if(!$id)
-        return 0;
-      $servername = "localhost";
-      $username = "root";
-      $password = "9934";
-      $dbname = "myDB";
-
-      // Create connection
-      $con = new mysqli($servername, $username, $password, $dbname);
-      // Check connection
-      if ($con->connect_error) {
-          //$isConnectionCreated = false;
-          return "false";
-          //die("Connection failed: " . $this->$conn->connect_error);
-      }
-      $id = (string) $id;
-      //$id = "'".$id."'";
-      //echo $id;
-      $sql = "SELECT sale_data FROM Sale_Print where sale_no = ".$id;
-      //echo $sql;
-      $result = $con->query($sql);
-      //echo "hhhhhh".$result->num_rows."hhhhhhh";
-      if ($result->num_rows == 1) {
-          $row = $result->fetch_assoc();
-          //echo "==23==";
-          return $row["sale_data"];
-          // if there is multiple string corresponding to one id
-          // while($row = $result->fetch_assoc()) {
-          //     echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-          // }
-      } else if($result->num_rows > 1){
-        //echo "$$23$$";
-          return 0;
-      }else{
-        //echo "**23**";
-        return -1;
-      }
-    }
-}
-
-$databaseOperation = new DatabaseOperation;
-$databaseOperation->insertIntoTable('5','five'); // 0 then it didn't got saved and 1 means it got saved
-$databaseOperation->getStringFromTable('5'); // retuurn string
-//$databaseOperation->
-
-//$data ='{"cart":{"1":{"item_id":"1","item_location":"1","stock_name":"stock","line":"1","name":"apple","item_number":"9988878","description":"","serialnumber":"","allow_alt_description":"0","is_serialized":"0","quantity":"1","discount":"0","in_stock":"-6.000","price":"1200.00","total":"1200.00","discounted_total":"1200.0000"}},"subtotal":"1200.0000","discounted_subtotal":"1200.0000","tax_exclusive_subtotal":"1200.0000","taxes":{"5.00% Tax1":"60.0000","8.00% Tax2":"96.0000"},"total":"1356.0000","discount":"0","receipt_title":"Sales Receipt","transaction_time":"10/16/2016 14:04:59","transaction_date":"10/16/2016","show_stock_locations":"","comments":"","payments":{"Cash":{"payment_type":"Cash","payment_amount":"1356"}},"amount_change":"0","amount_due":"0","employee":"Ravi Kumar","company_info":"1164/E New Thipssandra Main Road,\r\nNew Delhi\n918888888888\n","invoice_number":"","sale_id_num":"7","sale_id":"POS 7","barcode":"iVBORw0KGgoAAAANSUhEUgAAAMgAAAAeAQMAAABT8cPvAAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAK0lEQVQokWNgsDlg8OfPZ+bP5+0NbD58+PP582f788yf7RgYRmVGZUaUDABaWLLUBjxkHwAAAABJRU5ErkJggg==","cur_giftcard_value":null,"print_after_sale":true,"email_receipt":null,"company":"MRP","receipt_show_taxes":"1","receipt_show_total_discount":"1","receipt_show_date":"1","receipt_show_employee_name":"1","receipt_show_seller_address":"1","receipt_show_seller_phone_number":"1","receipt_show_serialnumber":"1","receipt_set_thank_you_message":"* Thank You.Please Visit Again *"}';
+*/
+$data = '{"cart":{"1":{"item_id":"1","item_location":"1","stock_name":"stock","line":"1","name":"apple","item_number":"9988878","description":"","serialnumber":"","allow_alt_description":"0","is_serialized":"0","quantity":"1","discount":"0","in_stock":"-24.000","price":"1200.00","total":"1200.00","discounted_total":"1200.0000"}},"subtotal":"1200.0000","discounted_subtotal":"1200.0000","tax_exclusive_subtotal":"1200.0000","taxes":{"5.00% Tax1":"60.0000","8.00% Tax2":"96.0000"},"total":"1356.0000","discount":"0","receipt_title":"Sales Receipt","transaction_time":"01/19/2017 14:55:14","transaction_date":"01/19/2017","show_stock_locations":"","comments":"","payments":{"Cash":{"payment_type":"Cash","payment_amount":"1356"}},"amount_change":"0","amount_due":"0","employee":"Ravi Kumar","company_info":"1164/E New Thipssandra Main Road,\r\nNew Delhi\n918888888888\n","invoice_number":"","sale_id_num":"29","sale_id":"POS 29","barcode":"iVBORw0KGgoAAAANSUhEUgAAAMgAAAAeAQMAAABT8cPvAAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAIklEQVQokWNgAIMMv7ey293OnIvZrJ68jgEZjMqMyowQGQBxyMaF6F721QAAAABJRU5ErkJggg==","cur_giftcard_value":null,"print_after_sale":true,"email_receipt":null,"company":"MRP","receipt_show_taxes":"1","receipt_show_total_discount":"1","receipt_show_date":"0","receipt_show_employee_name":"1","receipt_show_seller_address":"1","receipt_show_seller_phone_number":"0","receipt_show_serialnumber":"1","receipt_set_thank_you_message":"* Thank You.Please Visit Again *"}';
 
 /*
       $data["company"] -- DONE
@@ -333,67 +224,9 @@ function getDateToday() {
   return $date_today;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 $data = (array) json_decode($data);
-if( false ){
-//if( $data["print_after_sale"] == true){
+//if( false ){
+if( $data["print_after_sale"] == true){
 
     $printer -> selectPrintMode(Printer::MODE_DOUBLE_HEIGHT);
     
