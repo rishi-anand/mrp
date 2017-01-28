@@ -76,7 +76,7 @@ class Sms_lib
 			// 612 chars or less
 			// A single number or a comma-seperated list of numbers
 			$message = urlencode($message);
-			$data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
+			$data = "unicode=1&username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
 			$ch = curl_init('http://api.textlocal.in/send/?');
 			curl_setopt($ch, CURLOPT_POST, true);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
