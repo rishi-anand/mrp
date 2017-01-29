@@ -154,7 +154,8 @@ $(document).ready(function()
 		</div>
 		<div id='barcode'>
 			<img src='data:image/png;base64,<?php echo $barcode; ?>' /><br>
-			<?php echo $sale_id; ?>
+
+			<div id="sale_id"><?php echo $this->lang->line('sales_id').": ".$sale_id; ?></div>
 		</div>
 	</div>
 </div>

@@ -28,6 +28,7 @@ class Sms_lib
 		}
 		else
 		{	
+			//$response = TRUE;
 			// make sure passed string is url encoded
 			//-----$message = rawurlencode($message);
 			
@@ -57,7 +58,7 @@ class Sms_lib
 			//textlocal
 			$success_status = "success";
 			$failure_status = "failure";
-			$debug_level_test = TRUE; // make it to 'TRUE' for enable debug
+			$debug_level_test = FALSE; // make it to 'TRUE' for enable debug
 			// when $debug_level_test is set to TRUE then you can see the json response in
 			// browser developer tools
 			
@@ -85,6 +86,7 @@ class Sms_lib
 			curl_close($ch);
 			$result = json_decode($result_json);
 			$message_sent_status = $result->{'status'};
+			//echo $message_sent_status;
 			if (strcmp($message_sent_status, $success_status) == 0) {
 				$response = TRUE;
 			}
@@ -96,6 +98,7 @@ class Sms_lib
 			}
 		}
 
+		// echo $response;
 		return $response;
 	}
 }
