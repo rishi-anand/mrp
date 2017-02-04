@@ -83,7 +83,6 @@ class DatabaseOperation{
       $con = new mysqli($servername, $username, $password, $dbname);
       // Check connection
       if ($con->connect_error) {
-          //$isConnectionCreated = false;
           return "false";
           //die("Connection failed: " . $this->$conn->connect_error);
       }

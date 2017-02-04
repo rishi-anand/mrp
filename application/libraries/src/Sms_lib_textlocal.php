@@ -21,32 +21,10 @@ class Sms_lib
 		
 		$response = FALSE;
 		
-		if(!preg_match('/^[0-9,]*$/', $numbers)){
- 			$response = "ERROR : Phone number is invalid.";
- 			return $response;
-		}
 		// if any of the parameters is empty return with a FALSE
 		if(empty($username) || empty($hash) || empty($numbers) || empty($message) || empty($sender))
 		{
-			if(empty($username)){
-				$response = "ERROR : Username is empty. (Please config message settings in Store Config -> Message)";
-			}
-
-			if(empty($hash)){
-				$response = "ERROR : Password is empty. (Please config message settings in Store Config -> Message)";
-			}
-
-			if(empty($numbers)){
-				$response = "ERROR : Phone Number field is empty.";
-			}
-
-			if(empty($message)){
-				$response = "ERROR : Message field is empty.";
-			}
-
-			if(empty($sender)){
-				$response = "ERROR : Sender field is empty. (Please config message settings in Store Config -> Message)";
-			}
+			//echo $username . ' ' . $hash . ' ' . $numbers . ' ' . $message . ' ' . $sender;
 		}
 		else
 		{	$response = TRUE;
@@ -103,15 +81,30 @@ class Sms_lib
 			// A single number or a comma-seperated list of numbers
 			$message = urlencode($message);
 
-			$data_textlocal = "unicode=1&username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
-			$data_prpSms = "unicode=1&uname=".$username."&pass=".$hash."&send=".$sender."&dest=".$numbers."&msg=".$message."&priority=1";
-			$ch = curl_init('http://103.247.98.91/API/SendMsg.aspx?');
+			$data = "unicode=1&username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
+			$ch = curl_init('http://api.textlocal.in/send/?');
 			curl_setopt($ch, CURLOPT_POST, true);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, $data_prpSms);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			$response = curl_exec($ch); // This is the result from the API
+			$result_json = curl_exec($ch); // This is the result from the API
 			curl_close($ch);
-			return $response;
+			// 
+
+
+
+
+			$result = json_decode($result_json);
+			$message_sent_status = $result->{'status'};
+			//echo $message_sent_status;
+			// if (strcmp($message_sent_status, $success_status) == 0) {
+			// 	$response = TRUE;
+			// }
+
+			// below code will only be executed when $debug_level_test is set to TRUE
+			if($debug_level_test) {
+			echo $message_sent_status;
+			echo $result_json;
+			}
 		}
 
 		// echo $response;

@@ -36,14 +36,24 @@ class Messages extends Secure_Controller
 
 		$response = $this->sms_lib->sendSMS($phone, $message);
 
-		if($response)
+		if (preg_match('/ERROR/', $response))
 		{
-			echo json_encode(array('success' => TRUE, 'message' => $this->lang->line('messages_successfully_sent') . ' ' . $phone));
+			echo json_encode(array('success' => FALSE, 'message' => $response));
 		}
 		else
 		{
-			echo json_encode(array('success' => FALSE, 'message' => $this->lang->line('messages_unsuccessfully_sent') . ' ' . $phone));
+			echo json_encode(array('success' => TRUE, 'message' => $this->lang->line('messages_successfully_sent') . ' ' . $phone));
 		}
+		//echo json_encode(array('success' => TRUE, 'message' => $response . ' ' . $phone));
+
+		// if($response)
+		// {
+		// 	echo json_encode(array('success' => TRUE, 'message' => $this->lang->line('messages_successfully_sent') . ' ' . $phone));
+		// }
+		// else
+		// {
+		// 	echo json_encode(array('success' => FALSE, 'message' => $this->lang->line('messages_unsuccessfully_sent') . ' ' . $phone));
+		// }
 	}
 	
 	public function send_form($person_id = -1)
